@@ -1,6 +1,7 @@
 stamboek_*/
-.DS_Store  
+*/.DS_Store  
 .git/ 
 .idea/
 image_samples/*.done
 image_samples/page
+.DS_Store
