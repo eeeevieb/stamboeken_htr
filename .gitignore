@@ -3,4 +3,6 @@ loghi/
 .DS_Store  
 .git/ 
 .idea/
+image_samples/*.done
+image_samples/page
 
