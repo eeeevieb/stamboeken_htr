@@ -38,8 +38,8 @@ def send_get_request_and_process_xml(record_url, headers=None):
         if record_response.status_code == 200:
             record_root = etree.fromstring(record_response.content)
 
-            # we are interested in Control book 71.
-            target = "71"
+            # we are interested in Control book 906.
+            target = "906"
             # Directory where images will be saved
             image_directory = f"stamboek_{target}"
 
@@ -130,7 +130,8 @@ def send_get_request_and_process_xml(record_url, headers=None):
 
 
 if __name__ == "__main__":
-    url = 'https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.50&metadataPrefix=oai_ead'
+    # url = 'https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.50&metadataPrefix=oai_ead'
+    url = "https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.36.22&metadataPrefix=oai_ead"
 
     headers = {
         'Content-Type': 'application/xml',
