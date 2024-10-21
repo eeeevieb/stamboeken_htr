@@ -1,0 +1,323 @@
+(base) Sarahs-MacBook-Pro-4:loghi sarah_shoilee$ scripts/inference-pipeline.sh ../images_samples/
+Temporary directory created at: /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi
+Running Laypa baseline detection
+DeprecationWarning PREPROCESS.RESIZE.USE is losing support; please switch to PREPROCESS.RESIZE.RESIZE_MODE
+INPUT.SCALING_TEST is not set, inferring from INPUT.SCALING_TRAIN and PREPROCESS.RESIZE.SCALING to be 0.5
+[10/21 09:19:53 detectron2.checkpoint.detection_checkpoint]: [DetectionCheckpointer] Loading from /Users/sarah_shoilee/PycharmProjects/loghi/loghi/model/laypa/general/baseline/model_best_mIoU.pth ...
+[10/21 09:19:53 fvcore.common.checkpoint]: [Checkpointer] Loading from /Users/sarah_shoilee/PycharmProjects/loghi/loghi/model/laypa/general/baseline/model_best_mIoU.pth ...
+/opt/conda/envs/laypa/lib/python3.12/site-packages/fvcore/common/checkpoint.py:252: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(f, map_location=torch.device("cpu"))
+Predicting PageXML: 100% 2/2 [00:14<00:00,  7.23s/it]
+Laypa baseline detection done
+Extracting baselines and regions
+499 [pool-1-thread-1] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0064.png
+520 [pool-1-thread-2] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0065.png
+782 [pool-1-thread-1] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - FOUND LABELS:114
+826 [pool-1-thread-2] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - FOUND LABELS:90
+1299 [pool-1-thread-1] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - mergedLineDetected: /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0064.png
+1394 [pool-1-thread-1] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - mergedLineDetected: /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0064.png
+1441 [pool-1-thread-2] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - mergedLineDetected: /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0065.png
+1508 [pool-1-thread-2] INFO nl.knaw.huc.di.images.minions.BaselinesMapper - Mapping lines took: 20.13 ms
+1519 [pool-1-thread-2] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - textlines to match: 87 /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0065.png
+1749 [pool-1-thread-1] INFO nl.knaw.huc.di.images.minions.BaselinesMapper - Mapping lines took: 9.694 ms
+1749 [pool-1-thread-1] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - textlines to match: 112 /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0064.png
+2453 [pool-1-thread-2] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0065.png interline distance: 88.36288813749809
+2612 [pool-1-thread-1] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0064.png interline distance: 81.88406074096608
+3859 [pool-1-thread-2] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0065.png textlines: 88
+3864 [pool-1-thread-2] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0065.png average textline took: 15
+4520 [pool-1-thread-1] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0064.png textlines: 113
+4520 [pool-1-thread-1] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - /Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page/NL-HaNA_2.10.36.22_906_0064.png average textline took: 16
+errors: 0
+errors: 0
+warnings: 0
+warnings: 0
+5304 [main] INFO nl.knaw.huc.di.images.minions.MinionExtractBaselines - Finished all threads
+Extracting baselines and regions done
+Cutting out snippets
+78 [main] INFO nl.knaw.huc.di.images.minions.MinionCutFromImageBasedOnPageXMLNew - Ignore file '/Users/sarah_shoilee/PycharmProjects/loghi/images_samples/.DS_Store', not an image
+125 [main] INFO nl.knaw.huc.di.images.minions.MinionCutFromImageBasedOnPageXMLNew - Ignore file '/Users/sarah_shoilee/PycharmProjects/loghi/images_samples/page', not an image
+1564 [pool-1-thread-2] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - NL-HaNA_2.10.36.22_906_0065 interline distance: 88.36288813749809
+1566 [pool-1-thread-1] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - NL-HaNA_2.10.36.22_906_0064 interline distance: 81.88406074096608
+2700 [pool-1-thread-2] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - NL-HaNA_2.10.36.22_906_0065 textlines: 88
+2709 [pool-1-thread-2] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - NL-HaNA_2.10.36.22_906_0065 average textline took: 12
+3091 [pool-1-thread-1] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - NL-HaNA_2.10.36.22_906_0064 textlines: 113
+3091 [pool-1-thread-1] INFO nl.knaw.huc.di.images.layoutanalyzer.layoutlib.LayoutProc - NL-HaNA_2.10.36.22_906_0064 average textline took: 13
+errors: 0
+warnings: 0
+errors: 0
+warnings: 0
+Running HTR
+docker run -u 501:20 --rm -m 32000m --shm-size 10240m -ti -v /tmp:/tmp -v /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi:/var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi -v /Users/sarah_shoilee/PycharmProjects/loghi/loghi/model/loghi-htr:/Users/sarah_shoilee/PycharmProjects/loghi/loghi/model/loghi-htr loghi/docker.htr:2.1.4 bash -c LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libtcmalloc_minimal.so.4 python3 /src/loghi-htr/src/main.py             --model /Users/sarah_shoilee/PycharmProjects/loghi/loghi/model/loghi-htr/float32-generic-2023-02-15              --batch_size 64             --use_mask             --inference_list /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/lines.txt             --results_file /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/results.txt             --gpu -1             --output /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/output/             --beam_width 1 
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 12.5.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+2024-10-21 09:20:42.097228: E tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:9342] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-10-21 09:20:42.097759: E tensorflow/compiler/xla/stream_executor/cuda/cuda_fft.cc:609] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-10-21 09:20:42.100754: E tensorflow/compiler/xla/stream_executor/cuda/cuda_blas.cc:1518] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-10-21 09:20:42.275808: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-10-21 09:20:43.860695: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+Matplotlib created a temporary cache directory at /tmp/matplotlib-63v073u4 because the default path (/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+21/10/2024 09:20:46 - WARNING - Argument will lose support in May 2024: --use_mask. Masking will be enabled by default.
+21/10/2024 09:20:46 - WARNING - Argument will lose support in May 2024: --height. Height will be inferred from the VGSL spec.
+21/10/2024 09:20:46 - WARNING - Argument will lose support in May 2024: --channels. Channels will be inferred from the VGSL spec.
+21/10/2024 09:20:46 - WARNING - --batch_size > 1, setting use_mask=True
+21/10/2024 09:20:46 - WARNING - --do_inference implied by providing a inference_list
+21/10/2024 09:20:46 - INFO - Running with config:
+{
+    "args": {
+        "augmentation": {
+            "aug_binarize_otsu": false,
+            "aug_binarize_sauvola": false,
+            "aug_blur": false,
+            "aug_distort_jpeg": false,
+            "aug_elastic_transform": false,
+            "aug_invert": false,
+            "aug_multiply": 1,
+            "aug_random_crop": false,
+            "aug_random_shear": false,
+            "aug_random_width": false,
+            "visualize_augments": false
+        },
+        "decoding": {
+            "beam_width": 1,
+            "corpus_file": null,
+            "greedy": false,
+            "wbs_smoothing": 0.1
+        },
+        "depr": {
+            "channels": 3,
+            "config_file_output": null,
+            "do_inference": true,
+            "do_train": false,
+            "existing_model": null,
+            "height": 64,
+            "no_auto": false,
+            "output_charlist": null,
+            "thaw": false,
+            "use_mask": true
+        },
+        "general": {
+            "batch_size": 64,
+            "charlist": null,
+            "config_file": null,
+            "gpu": "-1",
+            "output": "/var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/output/",
+            "seed": 42
+        },
+        "inference": {
+            "inference_list": "/var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/lines.txt",
+            "results_file": "/var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/results.txt"
+        },
+        "learning_rate": {
+            "decay_per_epoch": false,
+            "decay_rate": 0.99,
+            "decay_steps": -1,
+            "learning_rate": 0.0003,
+            "linear_decay": false,
+            "optimizer": "adamw",
+            "warmup_ratio": 0.0
+        },
+        "misc": {
+            "deterministic": false,
+            "normalization_file": null
+        },
+        "model": {
+            "freeze_conv_layers": false,
+            "freeze_dense_layers": false,
+            "freeze_recurrent_layers": false,
+            "model": "/Users/sarah_shoilee/PycharmProjects/loghi/loghi/model/loghi-htr/float32-generic-2023-02-15",
+            "model_name": null,
+            "replace_final_layer": false,
+            "replace_recurrent_layer": null,
+            "use_float32": false
+        },
+        "training": {
+            "do_validate": false,
+            "early_stopping_patience": 20,
+            "epochs": 40,
+            "max_queue_size": 256,
+            "output_checkpoints": false,
+            "steps_per_epoch": null,
+            "test_list": null,
+            "train_list": null,
+            "training_verbosity_mode": "auto",
+            "validation_list": null,
+            "width": 65536
+        }
+    },
+    "git_hash": "f05ffe0e0d2ec3334ff636808093fa72a913da0d",
+    "notes": "",
+    "url_code": "https://github.com/knaw-huc/loghi",
+    "uuid": "91716c3c-5172-4204-a4dc-68cf13103b36"
+}
+21/10/2024 09:20:46 - INFO - Selected GPU indices from config: -1
+21/10/2024 09:20:46 - INFO - Available GPU(s): []
+21/10/2024 09:20:46 - INFO - Using CPU
+21/10/2024 09:20:46 - INFO - Using default strategy for single GPU/CPU
+21/10/2024 09:20:46 - INFO - Using float32 precision
+21/10/2024 09:20:46 - WARNING - Found padding character in the charlist. Removing it.
+21/10/2024 09:20:46 - INFO - Using charlist from: /Users/sarah_shoilee/PycharmProjects/loghi/loghi/model/loghi-htr/float32-generic-2023-02-15/charlist.txt
+21/10/2024 09:20:46 - WARNING - Legacy model format detected. This format will be deprecated in the future.
+21/10/2024 09:21:02 - INFO - Converting model to .keras format...
+21/10/2024 09:22:02 - INFO - Model converted and saved to /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/output/model_new10/model.keras
+21/10/2024 09:22:02 - INFO - Using injected charlist
+21/10/2024 09:22:02 - INFO - Processing raw data...
+21/10/2024 09:22:02 - INFO - Created data for inference with 199 samples
+21/10/2024 09:22:02 - INFO - Creating datasets...
+21/10/2024 09:22:03 - INFO - Using charlist: ['\x1b', ' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\\', ']', '^', '_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', '\x81', '\x83', '\x9d', '\xa0', '£', '¤', '¦', '§', '¨', '©', 'ª', '«', '¬', '\xad', '°', '±', '¶', 'º', '»', '¼', '½', '¾', 'À', 'Á', 'Â', 'Ã', 'Ä', 'Å', 'É', 'Ê', 'Ë', 'Ö', 'Ø', 'Ú', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'ï', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', '÷', 'ø', 'ù', 'ú', 'û', 'ü', 'ÿ', 'ā', 'ĉ', 'ċ', 'č', 'ď', 'Đ', 'đ', 'ē', 'ě', 'ĝ', 'ğ', 'ħ', 'ĩ', 'ī', 'ľ', 'ł', 'ň', 'ō', 'ř', 'š', 'ť', 'Ŧ', 'ŧ', 'ũ', 'ū', 'Ż', 'ž', 'ƀ', 'ƒ', 'Ƨ', 'ǂ', 'ǰ', 'Ȇ', 'ȇ', 'ȓ', 'ȝ', 'ȼ', 'ɔ', 'ɫ', 'ʋ', 'ʒ', 'ʳ', 'ˡ', 'ˢ', '˹', '˺', '̃', '̄', '̒', 'ͣ', 'ͩ', '·', 'Α', 'Η', 'κ', 'ϊ', 'ϭ', 'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ж', 'И', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Ъ', 'Ы', 'Э', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'ю', 'я', 'ѣ', '֑', '֓', '֖', '֜', '֞', '֣', '֦', '֭', 'ְ', 'ֱ', 'ֲ', 'ֳ', 'ִ', 'ֵ', 'ֶ', 'ַ', 'ָ', 'ֹ', 'ֺ', 'ֻ', 'ּ', 'ֽ', '־', 'ֿ', '׀', 'ׁ', 'ׂ', 'ׄ', 'ׅ', 'ׇ', 'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י', 'ך', 'כ', 'ל', 'ם', 'מ', 'ן', 'נ', 'ס', 'ע', 'ף', 'פ', 'ץ', 'צ', 'ק', 'ר', 'ש', 'ת', '׳', '״', '؋', '\u061d', '٧', '٨', '۸', 'ᵈ', 'ᵉ', 'ᵗ', 'ᵮ', 'ᶜ', 'ḿ', 'ṁ', 'ṗ', 'ṙ', 'ṽ', 'ẽ', '\u2000', '\u2001', '\u2002', '\u2003', '\u2009', '\u200d', '\u200f', '‒', '–', '—', '―', '‖', '‚', '‛', '„', '‟', '†', '•', '․', '…', '‧', '‰', '′', '″', '‸', '※', '⁁', '⁆', '⁋', '⁓', '⁛', '⁝', '\u206b', '\u206c', '\u206e', 'ⁱ', '₤', '€', '⃞', '℔', '№', '℞', '⅓', '⅔', '⅕', '⅖', '⅗', '⅛', '⅞', '⅟', 'Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ', 'Ⅵ', 'Ⅶ', 'Ⅷ', 'Ⅸ', 'Ⅹ', 'Ⅺ', 'ↄ', '∞', '≠', '┘', '┴', '□', '⛒', '✓', '⸗', 'Ꜣ', 'ꝉ', 'ꝑ', 'Ꝓ', 'ꝓ', 'Ꝕ', 'ꝕ', 'ꝙ', 'ꝝ', 'ꝥ', 'ꝧ', 'ꝫ', 'ꝯ', 'ꝰ', 'ꝶ', 'ꝺ', 'Ꞧ', 'ꞵ', 'ﬨ', 'שׁ', 'שׂ', 'שּׁ', 'אַ', 'אָ', 'בּ', 'גּ', 'דּ', 'וּ', 'כּ', 'פּ', 'קּ', 'תּ', 'וֹ', 'בֿ', 'כֿ', 'פֿ']
+21/10/2024 09:22:03 - INFO - Charlist length: 454
+21/10/2024 09:22:03 - INFO - Adjusting model for float32
+Model: "model_new10"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ image (InputLayer)          [(None, None, 64, 1)]     0         
+                                                                 
+ Conv1 (Conv2D)              (None, None, 64, 24)      240       
+                                                                 
+ batch_normalization (Batch  (None, None, 64, 24)      96        
+ Normalization)                                                  
+                                                                 
+ pool1 (MaxPooling2D)        (None, None, 32, 24)      0         
+                                                                 
+ dropout (Dropout)           (None, None, 32, 24)      0         
+                                                                 
+ Conv2 (Conv2D)              (None, None, 32, 48)      10416     
+                                                                 
+ batch_normalization_1 (Bat  (None, None, 32, 48)      192       
+ chNormalization)                                                
+                                                                 
+ pool2 (MaxPooling2D)        (None, None, 16, 48)      0         
+                                                                 
+ dropout_1 (Dropout)         (None, None, 16, 48)      0         
+                                                                 
+ Conv3 (Conv2D)              (None, None, 16, 96)      41568     
+                                                                 
+ batch_normalization_2 (Bat  (None, None, 16, 96)      384       
+ chNormalization)                                                
+                                                                 
+ dropout_2 (Dropout)         (None, None, 16, 96)      0         
+                                                                 
+ Conv4 (Conv2D)              (None, None, 16, 96)      83040     
+                                                                 
+ batch_normalization_3 (Bat  (None, None, 16, 96)      384       
+ chNormalization)                                                
+                                                                 
+ pool4 (MaxPooling2D)        (None, None, 8, 96)       0         
+                                                                 
+ dropout_3 (Dropout)         (None, None, 8, 96)       0         
+                                                                 
+ reshape (Reshape)           (None, None, 768)         0         
+                                                                 
+ bidirectional_1 (Bidirecti  (None, None, 1024)        5246976   
+ onal)                                                           
+                                                                 
+ bidirectional_2 (Bidirecti  (None, None, 1024)        6295552   
+ onal)                                                           
+                                                                 
+ bidirectional_3 (Bidirecti  (None, None, 1024)        6295552   
+ onal)                                                           
+                                                                 
+ bidirectional_4 (Bidirecti  (None, None, 1024)        6295552   
+ onal)                                                           
+                                                                 
+ bidirectional_5 (Bidirecti  (None, None, 1024)        6295552   
+ onal)                                                           
+                                                                 
+ dense3 (Dense)              (None, None, 457)         468425    
+                                                                 
+ activation (Activation)     (None, None, 457)         0         
+                                                                 
+=================================================================
+Total params: 31033929 (118.39 MB)
+Trainable params: 31033401 (118.38 MB)
+Non-trainable params: 528 (2.06 KB)
+_________________________________________________________________
+2024-10-21 09:22:11.765249: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 863109120 exceeds 10% of free system memory.
+2024-10-21 09:22:12.107479: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 863109120 exceeds 10% of free system memory.
+2024-10-21 09:22:12.377067: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 215875584 exceeds 10% of free system memory.
+2024-10-21 09:22:12.510267: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 431751168 exceeds 10% of free system memory.
+2024-10-21 09:22:12.838840: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 431751168 exceeds 10% of free system memory.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_9111e18e-3b76-4fbe-80fc-85ccfdcc8f9d.png	0.8653867840766907	Stamlist:)
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_7ba12688-02e5-4ea8-9719-0d75aa8be69d.png	0.8695411682128906	ficatie ad ƒ 400. -
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_903887c4-466e-4954-b8c8-aa6bfa3f1f4c.png	0.8831793665885925	18) ter beschikking van den Gouverneur
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-ea3e8773-c7c1-472f-925f-4c2828b548e0.png	0.7675476670265198	Gepensimneerd met ƒ 315 - 8pis Stamlijst; zie Enk 1„o
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_1849d8c7-71d8-4463-b900-df598d34bf46.png	0.8232114911079407	Costma
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_61a854e3-6480-405a-994f-c597363d4af2.png	0.927471935749054	uit zijne betrekking ontslagen
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_70991ab7-2bd0-4101-b1bb-c93bb1a22369.png	0.17950119078159332	1
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-b097fd7e-9339-440a-bcef-9336e20ad4c9.png	0.3811754882335663	AAAMERAtNaRn.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_3d734f1c-a30c-4b58-8a10-975a0cee3915.png	0.8732224702835083	Ondermeester aan de gouv: lagere Uhool te
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-b29dc90e-eaac-4f72-bf23-eaa56738575b.png	0.8956236243247986	„ 18 beschikking van den Gouverneur Generaal a eene gratificatie
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_8ee2e7da-12bb-49bc-b533-d9c72c77cc68.png	0.7925195693969727	: Verbt 21 October 1859
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_8f2a7323-b076-4e84-ae28-ee72871cbfe8.png	0.5786643028259277	Vertr 15 October 1859 N /60
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-b6876f47-1868-40e6-b4e5-419ee80632ff.png	0.7000444531440735	overgem
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_149f9a2c-21e8-41e4-9a88-8ee5351c216a.png	0.6347441077232361	e Hoentelan
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_12b19899-5d22-44c8-be32-73afa211bd5e.png	0.9368601441383362	Nalatenschappen.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-abad3b47-8b92-4749-a415-ccd1396b7578.png	0.8826189637184143	Hessel
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_8685cda5-d64d-413a-9ebd-8753d5081207.png	0.7749127149581909	ƒ 75. - 1 maands, in -
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-f34a127b-5514-44c9-b2ee-511a445b5bbf.png	0.9412558078765869	Uitbetaling der geatifi¬
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_6781ed41-c86a-40d3-bf91-6dc3c904e7c3.png	0.782446563243866	catie ad ƒ 1400. —
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_5d100e78-159e-439b-8499-e2fb86dec710.png	0.9192408919334412	Uitbetaling der grati.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_02a9f281-7611-40de-8952-27c5c383fa9f.png	0.721943199634552	hontverkooppakkuismeester
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_9a9ce008-ba90-4179-ab66-44f4ab6f0483.png	0.9015034437179565	Batavia, als gouvern=r
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_70ab4876-294b-4525-a3a3-ef9c06e4f9b3.png	0.10487573593854904	e
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_80842be2-6a0f-4985-bc7e-4ea6dd59b94b.png	0.864414632320404	„ den 20 September 1840. -
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-d996c227-5307-4271-930c-d1833e125cbc.png	0.8758683800697327	keling voor de dienst in Ned IndecH
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-f23f932a-8c11-47ed-a4ea-c343255f822e.png	0.7575563192367554	1Februari 1866
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-fc1ea766-b091-47d8-aacf-f1622abff8bf.png	0.9604999423027039	1861, die staat van
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_1e9b503f-b835-4eb5-b352-a9daea55bd4f.png	0.871253490447998	„ eene gratificatie van
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_98d7b866-98db-43a6-a749-c97fe7fc24ff.png	0.8387330174446106	Vertrekt naar Indie met de Medea, gerugvoerder J. Lourens - /: Vulr 15 October 1859 No 4/,1260/ en
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_90737957-8acd-4c1e-8b69-d8838dc94354.png	0.860567033290863	Verb=t 21 October 1859 Generaal van Ned. Indie, als onder - ƒ 400. - voor uitrusting
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_31ab9ea5-dd55-40e1-9d23-98d8deef6202.png	0.8219389319419861	Vert 27 Sept 1859 N 1 Krachtens konte magtiging gesteld X ondergenot van
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_2273194c-616b-4e28-b5bc-f9942f0ab97b.png	0.6733574867248535	Eak: 119 1859 N. 31.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_435c656a-be0d-4938-86e2-c9e5aef6d9be.png	0.8894200921058655	b vrijen overvoer naar
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_15ba3fd1-532a-4113-b93c-9aaac8012f5a.png	0.9341033697128296	Vertrekt naar Batavia, met het schip Willem en Carel, quagr: N. D. Steenveld.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-dbf49bf0-32ec-46f4-b221-0cf258d1025b.png	0.4537782371044159	ARnNISARNiNA.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_61b66bd8-74cc-4964-afe1-0ea9825757ec.png	0.9145545959472656	Vader Johannes,
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_825563e4-8f39-4152-bac0-de95b75e1ee4.png	0.5084752440452576	#WALITRIN.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_40e45cf2-95a2-4448-a9ff-62677080c1d8.png	0.8590316772460938	Verb:t 15 October 1859
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_41f19db5-7ff9-400b-a3d2-c429770bd227.png	0.7651709318161011	volio 122
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-b6bd7911-1400-456a-90a7-9617fb8a2406.png	0.955436646938324	Djokjocarta
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_97916a7a-e0d7-4b54-9e52-9002f80cb5b2.png	0.8700015544891357	gaande met den dag
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_7ba9b4f6-aa24-4012-a603-215eb9d3453d.png	0.7132699489593506	Derb=t 21 October 1859 No: 9
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_349402f4-397d-4430-bece-44b3627fbd93.png	0.8957201838493347	C eene bezoldiging van
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-babf0d24-f10d-4874-b98c-0a1323d2f5df.png	0.839378833770752	„ den 3 Maart 1841,
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_1eebdf75-8749-42dc-a1ed-ef1850368a3e.png	0.4649023413658142	No 9 95
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_7806e840-a7ed-4e9d-8219-f1f74e736c08.png	0.5233592391014099	NRAAISANNinE.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_762554a8-66ad-4ea4-a2d2-ff938e3a9b8c.png	0.6669170260429382	(Rapt 9
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_013a8979-914b-4925-8647-d0f02c790f60.png	0.7539752721786499	ƒ 75. -s maand in-
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_8a598053-ac3a-42ba-9b01-d6076781245f.png	0.9050471782684326	Batavia, als gouvern=r
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-bbce3961-5482-49ec-ab66-a30cf8190268.png	0.8900896906852722	C eene bezoldiging van
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_2d4037df-5f58-483c-b25b-7702a8e3b226.png	0.7455943822860718	see. /
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_32b3d521-5541-4105-b042-cf93cb769b4c.png	0.8365962505340576	valio 123
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_8dc24db2-9110-4a9f-980b-31ccdebb9ba5.png	0.8197819590568542	overleden te Menado, 21 augs
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_527f5361-66b5-4b3b-8816-d47ecd4dc05b.png	0.5142727494239807	#WALITRIT.
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-accd7e80-f9c8-4bbc-9ab9-3764f6db278f.png	0.7349891662597656	Ned. Iedie X
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_56a90f46-5826-450e-b73e-a1a58de87d18.png	0.7535480260848999	1 Septr 1887
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_2ca93cae-9899-4bcf-8862-d654cf5e2508.png	0.78719562292099	1859 No. 36. -
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-cbc546f7-89e2-4148-ba51-1a07484159cb.png	0.41430529952049255	AAnnERRInaRn. 1g5
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_59414837-cc79-4ede-b7de-f2e3bf11472f.png	0.9570393562316895	ting,
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_6664e67e-b561-4d56-82d5-c8db4ab33fe0.png	0.085203155875206	e
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_33add86b-643b-454a-9bc3-77584121af86.png	0.7280409336090088	Jaan Crs 1884 No. 19
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-ee7c1f09-8d38-4aa7-9438-71bac7ec2c93.png	0.5403985977172852	in't slapt Grof
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-f753c495-af84-408d-b691-2f118064818e.png	0.7997579574584961	129,, waarin zijne
+21/10/2024 09:22:23 - INFO - /var/folders/jg/8kz6nb554_3dz1_0swrmdw480000gn/T/tmp.a1nwDhW5vi/imagesnippets//NL-HaNA_2.10.36.22_906_0065/NL-HaNA_2.10.36.22_906_0065-line_7e713aa7-39c0-4f28-879f-698a4108f56c.png	0.5790289044380188	KieC,

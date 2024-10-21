@@ -4,14 +4,15 @@ from lxml import etree
 from tqdm import tqdm
 
 
-def download_image(url, folder):
+def download_image(url, image_label, folder):
     try:
         # Send a GET request to the image URL
         response = requests.get(url, stream=True)
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
             # Extract the filename from the URL
-            filename = os.path.join(folder, url.split("/")[-1]+".jpg")
+            # filename = os.path.join(folder, url.split("/")[-1]+".jpg")
+            filename = os.path.join(folder, image_label)
             # Save the image to the local file
             with open(filename, 'wb') as f:
                 for chunk in response.iter_content(1024):
@@ -62,15 +63,35 @@ def send_get_request_and_process_xml(record_url, headers=None):
                     if control_book_response.status_code == 200:
                         control_book_root = etree.fromstring(control_book_response.content)
 
-                        xpath_query = '//mets:fileGrp[@USE="DEFAULT"]/mets:file/mets:FLocat/@xlink:href'
+                        # xpath_query = '//mets:fileGrp[@USE="DEFAULT"]/mets:file/mets:FLocat/@xlink:href'
+                        xpath_query1 = '//mets:fileGrp[@USE="DEFAULT"]/mets:file/@ID | ' \
+                                                    '//mets:fileGrp[@USE="DEFAULT"]/mets:file/mets:FLocat/@xlink:href '
 
-                        hrefs = control_book_root.xpath(xpath_query, namespaces=namespaces)
+                        query_results = control_book_root.xpath(xpath_query1, namespaces=namespaces)
+
+                        """Convert consecutive pairs in a list to dictionaries with 'id' and 'href' keys."""
+                        dictionary_list = []
+
+                        # Iterate through the list two items at a time
+                        for i in range(0, len(query_results), 2):
+                            if i + 1 < len(query_results):
+                                # Create a dictionary for each pair
+                                pair_dict = {
+                                    "id": str(query_results[i])[:-3],
+                                    "href": query_results[i + 1]
+                                }
+                                dictionary_list.append(pair_dict)
 
                         # Print the result
-                        for href in tqdm(hrefs):
-                            print(href)
-                            print("\n")
-                            download_image(href, image_directory)
+                        for item in tqdm(dictionary_list):
+                            print(f"{item['href']}\n")
+
+                            # retrieve correct image label
+                            xpath_query2 = f'''//mets:div[@ID="{item['id']}"]/@LABEL'''
+                            query_results = control_book_root.xpath(xpath_query2, namespaces=namespaces)
+                            # print(query_results)
+                            
+                            download_image(item['href'], str(query_results[0]).split("/")[-1], image_directory)
 
                 except Exception as e:
                     print(f"An error occurred: {e}")
@@ -110,6 +131,7 @@ def send_get_request_and_process_xml(record_url, headers=None):
 
 if __name__ == "__main__":
     url = 'https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.50&metadataPrefix=oai_ead'
+
     headers = {
         'Content-Type': 'application/xml',
     }
