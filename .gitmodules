@@ -1,0 +1,3 @@
+[submodule "loghi"]
+	path = loghi
+	url = https://github.com/knaw-huc/loghi.git
