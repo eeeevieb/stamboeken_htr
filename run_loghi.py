@@ -1,4 +1,5 @@
 import os
+import pty
 import shutil
 import time
 import subprocess
@@ -24,9 +25,27 @@ def copy_image(image_name):
 def run_bash_script():
     try:
         os.chdir("loghi")
-        subprocess.Popen(['%s %s' %(bash_script, os.path.join("..", destination_folder))], shell=True)
         # TODO: Doesn't work; says "the input device is not a TTY"
-        print(f"Successfully ran bash script: {bash_script}")
+        # subprocess.Popen(['%s %s' %(bash_script, os.path.join("..", destination_folder))], shell=True)
+
+        # Create new tty
+        # otherwise got error: "the input device is not a TTY"
+        master_fd, slave_fd = pty.openpty()
+
+        # Call CLI Process
+        cmd = "scripts/inference-pipeline.sh " \
+                  "../image_samples"
+
+        print("[DEBUG]: {}".format(cmd))
+        proc = subprocess.Popen(cmd,
+                                stdin=slave_fd,
+                                stderr=subprocess.STDOUT,
+                                shell=True,
+                                universal_newlines=True,
+                                start_new_session=True)
+
+        proc.communicate()
+        print(f"Successfully ran bash script: {cmd}")
         os.chdir("../")
     except subprocess.CalledProcessError as e:
         print(f"Error running bash script: {e}")
@@ -37,6 +56,7 @@ def delete_image(image_name):
     image_path = os.path.join(destination_folder, image_name)
     if os.path.exists(image_path):
         os.remove(image_path)
+        os.remove(image_path+".done")
         print(f"Deleted {image_name} from {destination_folder}")
     else:
         print(f"{image_name} not found in {destination_folder}")
@@ -60,6 +80,7 @@ def main():
 
         # Pause for a moment before moving to the next image
         time.sleep(5)  # Adjust the sleep time as needed
+
 
 if __name__ == '__main__':
     main()
