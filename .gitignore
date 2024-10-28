@@ -4,4 +4,5 @@ stamboek_*/
 .idea/
 image_samples/*.done
 image_samples/page
+output/*
 .DS_Store
