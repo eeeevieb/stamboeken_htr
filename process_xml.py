@@ -43,7 +43,7 @@ def process_xml(file_path):
 def process_all_xml_files(folder):
     folio_list = list()
     for root_dir, _, files in os.walk(folder):
-        for file_name in files:
+        for file_name in sorted(files):
             if file_name.endswith(".xml"):
                 file_path = os.path.join(root_dir, file_name)
                 folios = process_xml(file_path)
