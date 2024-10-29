@@ -56,6 +56,16 @@ def extract_genealogy_information(xml_file):
 
         Returns:
         dict: Extracted genealogy information.
+
+        Pseudo-code:
+        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
+        | Case                      | Search Keyword or Phrase  | Description                                 | Regex Pattern                        | Captured Information            |
+        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
+        | **1: Vader (Father)**     | `Vader`                   | Checks if line contains "Vader"             | `.*Vader\s+(.+)`                    | Text after "Vader" (Father's name) |
+        | **2: Moeder (Mother)**    | `Moeder`                  | Checks if line contains "Moeder"            | `.*Moeder\s+(.+)`                   | Text after "Moeder" (Mother's name) |
+        | **3: Geboorte datum (DOB)**| `Geboren`                | Checks if line contains "Geboren"           | `Geboren\s+(.+)`                    | Text after "Geboren" (Date of Birth) |
+        | **4: Geboorte Plaats (Place of Birth)** | `te`          | Checks if line starts with "te"             | `^te\s+(.+)`                        | Text after "te" (Place of Birth) |
+        | **5: Laatste Woonplaats (Last Residence)** | `laatst gewoond te` | Checks if line contains "laatst gewoond te" | `laatst\s*gewoond te\s+(.+)` | Text after "laatst gewoond te" (Last Residence) |
     """
 
     try:
@@ -118,6 +128,16 @@ def extract_genealogy_information(xml_file):
             if laatste_woonplaats_match:
                 genealogy_info["Laatste Woonplaats"] = laatste_woonplaats_match.group(1).strip()
 
+        with open(os.path.join(output_path, 'basic_genealogy_information.csv'), 'a') as f:
+            csvwriter = csv.writer(f)
+            csvwriter.writerow(
+                [''.join(xml_file.split('/')[-1].split(".")[:-1]),
+                 genealogy_info["Vader"],
+                 genealogy_info["Moeder"],
+                 genealogy_info["Geboorte datum"],
+                 genealogy_info["Geboorte Plaats"],
+                 genealogy_info["Laatste Woonplaats"]])
+
         return genealogy_info
 
     except etree.XMLSyntaxError:
@@ -140,16 +160,24 @@ def extract_military_posting_information():
 
 # Walk through all .xml files in the folder
 def process_all_xml_files(folder):
+    with open(os.path.join(output_path, 'basic_genealogy_information.csv'), 'w+') as f:
+        csvwriter = csv.writer(f)
+        # Write header row
+        csvwriter.writerow(["stamboeken", "Vader", "Moeder", "Geboorte datum", "Geboorte Plaats", "Laatste Woonplaats"])
+
     for root_dir, _, files in os.walk(folder):
         for file_name in sorted(files):
             if file_name.endswith(".xml"):
                 file_path = os.path.join(root_dir, file_name)
                 print(f"Processing xml: {file_path}...\n")
-                extract_textequiv(file_path)
+                # extract_textequiv(file_path)
+
+                extract_genealogy_information(file_path)
 
 
 # Example usage
 input_path = "image_samples/page"
 output_path = 'output'
-# process_all_xml_files(input_path)
-print(extract_genealogy_information("image_samples/page/NL-HaNA_2.10.50_71_0006.xml")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
+
+process_all_xml_files(input_path)
+# print(extract_genealogy_information("image_samples/page/NL-HaNA_2.10.50_71_0006.xml")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
