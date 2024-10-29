@@ -8,6 +8,7 @@ import subprocess
 source_folder = 'stamboek_906'  # Folder where the images are initially located
 destination_folder = 'image_samples'  # Folder where the image will be moved
 bash_script = 'scripts/inference-pipeline.sh'  # Path to your bash script
+base_name = 'NL-HaNA_2.10.36.22_906_'  # Base name for image
 
 
 # Function to copy the image
@@ -64,8 +65,7 @@ def delete_image(image_name):
 
 # Main loop to repeat the steps
 def main():
-    base_name = 'NL-HaNA_2.10.36.22_906_'
-    for i in range(4, 267):  # Loop from 0004 to 0266
+    for i in range(77, 267):  # Loop from 0004 to 0266
         image_name = f"{base_name}{str(i).zfill(4)}"  # Format the counter with leading zeros
         image_name += '.jpg'  # Assuming the images are in .jpg format
 
