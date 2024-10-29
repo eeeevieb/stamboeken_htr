@@ -152,4 +152,4 @@ def process_all_xml_files(folder):
 input_path = "image_samples/page"
 output_path = 'output'
 # process_all_xml_files(input_path)
-print(extract_genealogy_information("image_samples/page/NL-HaNA_2.10.50_71_0006.xml"))
+print(extract_genealogy_information("image_samples/page/NL-HaNA_2.10.50_71_0006.xml")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
