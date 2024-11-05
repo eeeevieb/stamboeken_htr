@@ -1,3 +1,23 @@
+### Install Mini-conda
+Documentation: https://docs.anaconda.com/miniconda/
+
+### Conda Create Environment
+
+Create the environment from the environment.yml file:
+```bash
+conda env create -f environment.yml
+```
+
+### Run Script
+1. ```bash
+   cd loghi
+   ```
+2. Change PATHS in [loghi/scripts/inference-pipeline.sh](loghi/scripts/inference-pipeline.sh), as specified in loghi module
+3. type command
+   ```bash
+   scripts/inference-pipeline.sh ../images_samples/
+   ```
+
 ### Loghi Instruction:
 1. Pull loghi repo here 
 ```bash
