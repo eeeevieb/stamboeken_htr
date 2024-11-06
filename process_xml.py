@@ -1,3 +1,5 @@
+from typing import Any
+
 import os
 from lxml import etree
 import re
@@ -41,7 +43,21 @@ def extract_textequiv(file_path):
         print(f"Error parsing {file_path}. File may be malformed.")
 
 
-def extract_genealogy_information(xml_file):
+"""
+Pseudo-code:
+        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
+        | Case                      | Search Keyword or Pattern  | Description                                 | Regex Pattern                        | Captured Information            |
+        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
+        | **1: Vader (Father)**     | `Vader`                   | Checks if line contains "Vader"             | `.*Vader\s+(.+)`                    | Text after "Vader" (Father's name) |
+        | **2: Moeder (Mother)**    | `Moeder`                  | Checks if line contains "Moeder"            | `.*Moeder\s+(.+)`                   | Text after "Moeder" (Mother's name) |
+        | **3: Geboorte datum (DOB)**| `Geboren`                | Checks if line contains "Geboren"           | `Geboren\s+(.+)`                    | Text after "Geboren" (Date of Birth) |
+        | **4: Geboorte Plaats (Place of Birth)** | `te`        | Checks if line starts with "te"             | `^te\s+(.+)`                        | Text after "te" (Place of Birth) |
+        | **5: Laatste Woonplaats (Last Residence)** | `laatst gewoond te` | Checks if line contains "laatst gewoond te" | `laatst\s*gewoond te\s+(.+)` | Text after "laatst gewoond te" (Last Residence) |
+        | **6: Campaigns**          | `4-digit year followed by place name`| Checks if starts with 4 digit and followed by strings | `\b(\d{4})\s+([a-zA-Z]+[\sa-zA-Z]*)` | 4 digit as Year, string as place |
+"""
+
+
+def extract_information(xml_file, output_file):
     """
         Extracts genealogy information, i.e.,:
             - Vader (father)
@@ -49,6 +65,7 @@ def extract_genealogy_information(xml_file):
             - Geboorte datum (birth date)
             - Geboorte Plaats (birthplace)
             - Laatste Woonplaats (last residence)
+        Extract  campaigns (LAST COLUMN); leaving the special comment from the same column
         from the XML content based on different cases.
 
         Parameters:
@@ -57,15 +74,6 @@ def extract_genealogy_information(xml_file):
         Returns:
         dict: Extracted genealogy information.
 
-        Pseudo-code:
-        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
-        | Case                      | Search Keyword or Phrase  | Description                                 | Regex Pattern                        | Captured Information            |
-        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
-        | **1: Vader (Father)**     | `Vader`                   | Checks if line contains "Vader"             | `.*Vader\s+(.+)`                    | Text after "Vader" (Father's name) |
-        | **2: Moeder (Mother)**    | `Moeder`                  | Checks if line contains "Moeder"            | `.*Moeder\s+(.+)`                   | Text after "Moeder" (Mother's name) |
-        | **3: Geboorte datum (DOB)**| `Geboren`                | Checks if line contains "Geboren"           | `Geboren\s+(.+)`                    | Text after "Geboren" (Date of Birth) |
-        | **4: Geboorte Plaats (Place of Birth)** | `te`          | Checks if line starts with "te"             | `^te\s+(.+)`                        | Text after "te" (Place of Birth) |
-        | **5: Laatste Woonplaats (Last Residence)** | `laatst gewoond te` | Checks if line contains "laatst gewoond te" | `laatst\s*gewoond te\s+(.+)` | Text after "laatst gewoond te" (Last Residence) |
     """
 
     try:
@@ -91,6 +99,10 @@ def extract_genealogy_information(xml_file):
             "Geboorte Plaats": None,
             "Laatste Woonplaats": None
         }
+        campaign_list = list()
+        event_list = list()
+
+        text_by_region = {}
 
         # Extract and print the required information
         for line in result:
@@ -101,6 +113,14 @@ def extract_genealogy_information(xml_file):
 
             if text_equiv_text is None:
                 continue
+
+            # Concatenate text for each text_region_id
+            if text_region_id in text_by_region:
+                # Append new text for existing text_region_id
+                text_by_region[text_region_id] += f" {text_equiv_text}"
+            else:
+                # Initialize entry for new text_region_id
+                text_by_region[text_region_id] = text_equiv_text
 
             # Case 1: Extract Vader
             vader_match = re.search(r'.*Vader\s+(.+)', text_equiv_text, re.IGNORECASE)
@@ -128,7 +148,29 @@ def extract_genealogy_information(xml_file):
             if laatste_woonplaats_match:
                 genealogy_info["Laatste Woonplaats"] = laatste_woonplaats_match.group(1).strip()
 
-        with open(os.path.join(output_path, 'basic_genealogy_information.csv'), 'a') as f:
+            # Case 6: Extract campaign (e.g., "1809 Zeeland")
+
+            campaign_match = re.search(r'\b(\d{4})\s+([a-zA-Z]+.*)', text_equiv_text, re.IGNORECASE)
+            if campaign_match:
+                campaign: Dict = {"Year": campaign_match.group(1).strip(), "Place": campaign_match.group(2).strip()}
+                campaign_list.append(campaign)
+
+        # Extract Event --> Military posting information
+        for region_id, concatenated_text in text_by_region.items():
+            # print(f"Region ID: {region_id}, Text: {concatenated_text}")
+            date_pattern = r'[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*'
+            pattern = rf"(.*?{date_pattern})"
+            event_lines = re.findall(pattern, concatenated_text)
+            if len(event_lines) >= 2:
+                for event in event_lines:
+                    match = re.search(rf'(.*)?({date_pattern})', event, re.IGNORECASE)
+                    event_dict = {
+                        'Context': match.group(1).strip(),
+                        'Date': match.group(2).strip()
+                    }
+                    event_list.append(event_dict)
+
+        with open(output_file, 'a') as f:
             csvwriter = csv.writer(f)
             csvwriter.writerow(
                 [''.join(xml_file.split('/')[-1].split(".")[:-1]),
@@ -136,43 +178,30 @@ def extract_genealogy_information(xml_file):
                  genealogy_info["Moeder"],
                  genealogy_info["Geboorte datum"],
                  genealogy_info["Geboorte Plaats"],
-                 genealogy_info["Laatste Woonplaats"]])
-
-        return genealogy_info
+                 genealogy_info["Laatste Woonplaats"],
+                 ';'.join([str(dict) for dict in campaign_list]),
+                 ';'.join([str(event) for event in event_list])])
 
     except etree.XMLSyntaxError:
         print(f"Error parsing {file_path}. File may be malformed.")
 
 
-def extract_campaign_information():
-    """
-    TODO: Extract  campaigns (LAST COLUMN)
-    """
-    pass
-
-
-def extract_military_posting_information():
-    """
-    TODO: Extract  campaigns (LAST COLUMN)
-    """
-    pass
-
-
 # Walk through all .xml files in the folder
 def process_all_xml_files(folder):
-    with open(os.path.join(output_path, 'basic_genealogy_information.csv'), 'w+') as f:
+    output_file = os.path.join(output_path, 'regex_extracted_information.csv')
+    with open(output_file, 'w+') as f:
         csvwriter = csv.writer(f)
         # Write header row
-        csvwriter.writerow(["stamboeken", "Vader", "Moeder", "Geboorte datum", "Geboorte Plaats", "Laatste Woonplaats"])
+        csvwriter.writerow(["stamboeken", "Vader", "Moeder", "Geboorte datum", "Geboorte Plaats", "Laatste Woonplaats", "Campaigns"])
 
     for root_dir, _, files in os.walk(folder):
         for file_name in sorted(files):
             if file_name.endswith(".xml"):
                 file_path = os.path.join(root_dir, file_name)
-                print(f"Processing xml: {file_path}...\n")
+                print(f"Processing xml: {file_path}...")
                 # extract_textequiv(file_path)
 
-                extract_genealogy_information(file_path)
+                extract_information(file_path, output_file)
 
 
 # Example usage
@@ -180,4 +209,4 @@ input_path = "image_samples/page"
 output_path = 'output'
 
 process_all_xml_files(input_path)
-# print(extract_genealogy_information("image_samples/page/NL-HaNA_2.10.50_71_0006.xml")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
+# print(extract_information("image_samples/page/NL-HaNA_2.10.50_71_0006.xml", "out.csv")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
