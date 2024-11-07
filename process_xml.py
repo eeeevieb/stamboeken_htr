@@ -54,6 +54,7 @@ Pseudo-code:
         | **4: Geboorte Plaats (Place of Birth)** | `te`        | Checks if line starts with "te"             | `^te\s+(.+)`                        | Text after "te" (Place of Birth) |
         | **5: Laatste Woonplaats (Last Residence)** | `laatst gewoond te` | Checks if line contains "laatst gewoond te" | `laatst\s*gewoond te\s+(.+)` | Text after "laatst gewoond te" (Last Residence) |
         | **6: Campaigns**          | `4-digit year followed by place name`| Checks if starts with 4 digit and followed by strings | `\b(\d{4})\s+([a-zA-Z]+[\sa-zA-Z]*)` | 4 digit as Year, string as place |
+        | **6: Military Postings**          | `more than 1 date pattern`| Checks if strings has more than one date patterns | `.*?[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*` | String before the date as Context, date as Event Date |
 """
 
 
@@ -152,13 +153,13 @@ def extract_information(xml_file, output_file):
 
             campaign_match = re.search(r'\b(\d{4})\s+([a-zA-Z]+.*)', text_equiv_text, re.IGNORECASE)
             if campaign_match:
-                campaign: Dict = {"Year": campaign_match.group(1).strip(), "Place": campaign_match.group(2).strip()}
+                campaign = {"Year": campaign_match.group(1).strip(), "Place": campaign_match.group(2).strip()}
                 campaign_list.append(campaign)
 
         # Extract Event --> Military posting information
         for region_id, concatenated_text in text_by_region.items():
             # print(f"Region ID: {region_id}, Text: {concatenated_text}")
-            date_pattern = r'[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*'
+            date_pattern = r'[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*' # 2-digit(date) followed by string(month) followed by 4-digit(year)
             pattern = rf"(.*?{date_pattern})"
             event_lines = re.findall(pattern, concatenated_text)
             if len(event_lines) >= 2:
