@@ -30,7 +30,7 @@ scripts/inference-pipeline.sh ../images_samples/
 ```
 
 # Scripts
-### Run Loghi 
+## HTR
 1. ```bash
    cd loghi
    ```
@@ -40,12 +40,12 @@ scripts/inference-pipeline.sh ../images_samples/
    scripts/inference-pipeline.sh ../images_samples/
    ```
 
-### Run Loghi on entire stamboeken
+## HTR on an entire stamboeken collections
 ```
 python run_loghi.py
 ```
 
-### Information Extraction using Regex Patterns
+## Extract Information using Regex Patterns
 | Case                                       | Search Keyword or Pattern             | Description                                           | Regex Pattern                              | Captured Information                                  |
 |--------------------------------------------|---------------------------------------|-------------------------------------------------------|--------------------------------------------|-------------------------------------------------------|
 | **1: Vader (Father)**                      | `Vader`                               | Checks if line contains "Vader"                       | `.*Vader\s+(.+)`                           | Text after "Vader" (Father's name)                    |
@@ -57,3 +57,8 @@ python run_loghi.py
 | **7: Military Postings**                   | `more than 1 date pattern`            | Checks if strings has more than one date patterns     | `.*?[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*` | String before the date as Context, date as Event Date |
 
 
+## Extract Information using LLM
+
+```
+python Llama.py
+```
