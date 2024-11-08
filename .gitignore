@@ -6,3 +6,5 @@ image_samples/*.done
 image_samples/page
 output/*
 .DS_Store
+ground_truth.zip
+ground_truth
