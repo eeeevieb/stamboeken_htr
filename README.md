@@ -1,15 +1,15 @@
-## Set-up
-### 1. Install Mini-conda
+# Set-up
+#### 1. Install Mini-conda
 Documentation: https://docs.anaconda.com/miniconda/
 
-### 2. Conda Create Environment
+#### 2. Conda Create Environment
 
 Create the environment from the environment.yml file:
 ```bash
 conda env create -f environment.yml
 ```
 
-### 3. Loghi Instruction:
+#### 3. Loghi Instruction:
 1. Pull loghi repo here 
 ```bash
 git clone git@github.com:knaw-huc/loghi.git
@@ -29,7 +29,7 @@ docker pull loghi/docker.loghi-tooling
 scripts/inference-pipeline.sh ../images_samples/
 ```
 
-## Scripts
+# Scripts
 ### Run Loghi 
 1. ```bash
    cd loghi
