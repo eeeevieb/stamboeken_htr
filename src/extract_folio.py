@@ -60,6 +60,6 @@ def process_all_xml_files(folder):
 
 
 # Example usage
-input_path = "image_samples/page"
-output_directory = 'output'
+input_path = "../image_samples/page"
+output_directory = '../output'
 process_all_xml_files(input_path)

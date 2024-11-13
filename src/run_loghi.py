@@ -5,8 +5,8 @@ import time
 import subprocess
 
 # Define paths
-source_folder = 'stamboek_906'  # Folder where the images are initially located
-destination_folder = 'image_samples'  # Folder where the image will be moved
+source_folder = '../stamboek_906'  # Folder where the images are initially located
+destination_folder = '../image_samples'  # Folder where the image will be moved
 bash_script = 'scripts/inference-pipeline.sh'  # Path to your bash script
 base_name = 'NL-HaNA_2.10.36.22_906_'  # Base name for image
 
@@ -25,6 +25,7 @@ def copy_image(image_name):
 # Function to run the bash script
 def run_bash_script():
     try:
+        os.chdir("../")
         os.chdir("loghi")
         # TODO: Doesn't work; says "the input device is not a TTY"
         # subprocess.Popen(['%s %s' %(bash_script, os.path.join("..", destination_folder))], shell=True)
@@ -47,7 +48,7 @@ def run_bash_script():
 
         proc.communicate()
         print(f"Successfully ran bash script: {cmd}")
-        os.chdir("../")
+        
     except subprocess.CalledProcessError as e:
         print(f"Error running bash script: {e}")
 

@@ -41,7 +41,7 @@ def send_get_request_and_process_xml(record_url, headers=None):
             # we are interested in Control book 906.
             target = "906"
             # Directory where images will be saved
-            image_directory = f"stamboek_{target}"
+            image_directory = f"../stamboek_{target}"
 
             # Create the directory if it does not exist
             if not os.path.exists(image_directory):

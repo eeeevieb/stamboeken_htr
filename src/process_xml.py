@@ -206,8 +206,8 @@ def process_all_xml_files(folder):
 
 
 # Example usage
-input_path = "image_samples/page"
-output_path = 'output'
+input_path = "../image_samples/page"
+output_path = '../output'
 
 process_all_xml_files(input_path)
-# print(extract_information("image_samples/page/NL-HaNA_2.10.50_71_0006.xml", "out.csv")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
+# print(extract_information("../image_samples/page/NL-HaNA_2.10.50_71_0006.xml", "out.csv")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
