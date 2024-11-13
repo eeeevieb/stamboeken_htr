@@ -1,3 +1,5 @@
+- Achternaam
+- Voornaam
 - vader
 - moeder
 - geboorte datun
@@ -6,10 +8,12 @@
 
 Hints:
 
-| Case                                       | Description                                           |
-|--------------------------------------------|-------------------------------------------------------|
-| **1: Vader (Father)**                      | Checks if line contains "Vader"                       |
-| **2: Moeder (Mother)**                     | Checks if line contains "Moeder"                      |
-| **3: Geboorte datum (DOB)**                | Checks if line contains "Geboren"                     |
-| **4: Geboorte Plaats (Place of Birth)**    | Checks if line starts with "te"                       |
-| **5: Laatste Woonplaats (Last Residence)** | Checks if line contains "laatst gewoond te"           |
+| Case                                      | Description                                           |
+|-------------------------------------------|-------------------------------------------------------|
+| **1: Achternaam **                         | Checks if line contains surname only, no other words    |
+| **2: Voornaam **                          | Checks if line contains first name(s) only, no other words  |
+| **3: Vader **                             | Checks if line contains "Vader"                       |
+| **4: Moeder **                            | Checks if line contains "Moeder"                      |
+| **5: Geboorte datum **                    | Checks if line contains "Geboren"                     |
+| **6: Geboorte Plaats **                   | Checks if line starts with "te"                       |
+| **7: Laatste Woonplaats **                | Checks if line contains "laatst gewoond te"           |
