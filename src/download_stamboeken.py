@@ -1,71 +1,136 @@
-from download_control_book import download_image
-import pandas as pd
-import re, time, os, requests, openpyxl, json, ast, glob
+import re
+import os
+import time
+import json
+import requests
+import openpyxl
 from lxml import etree
 from tqdm import tqdm
+from download_control_book import download_image
 
 
-def get_downlad_url(content, image_file):
-    # Parse the file as XML/HTML
+def parse_html_content(content):
+    """
+    Parse HTML content and extract the <script> element of type 'application/json'.
+    
+    Args:
+        content (str): HTML content to parse.
+    
+    Returns:
+        dict: Parsed JSON data from the <script> tag, or None if not found.
+    """
     parser = etree.HTMLParser()
     tree = etree.fromstring(content, parser)
-
-    # Query for the <script> element with type="application/json"
     script_element = tree.xpath('//script[@type="application/json"]')
 
-    # Extract the text content within the tag
     if script_element:
         script_text = script_element[0].text
-
-        # Parse the main JSON string
-        json_string = json.loads(script_text)
-
-        # Extract the nested 'view_response' and parse it as JSON
-        view_response_str = json_string["na_viewer"]["view_response"]
-        view_response = json.loads(view_response_str)
-
-        # Extract 'downloadURI' from the 'files' list for the given image
-        download_uris = [file["downloadURI"] for file in view_response["files"] if file["filename"] == image_file]
-
-        return download_uris[0]
+        return json.loads(script_text)
     else:
         print("No <script> element with type='application/json' found.")
+        return None
 
 
+def extract_download_url(parsed_json, image_filename):
+    """
+    Extract the download URL for a specific image from the parsed JSON data.
+    
+    Args:
+        parsed_json (dict): JSON data extracted from the HTML content.
+        image_filename (str): Name of the image file to find the URL for.
+    
+    Returns:
+        str: The download URL for the image, or None if not found.
+    """
+    try:
+        view_response_str = parsed_json["na_viewer"]["view_response"]
+        view_response = json.loads(view_response_str)
 
-def download_stamboeken(input_file, output_path):
-    start = time.perf_counter()
-    with open(input_file, 'rb') as f:
-        rows = iter_excel_openpyxl(f)
-        for row in tqdm(rows):
-            if re.search(r'NL-HaNA_(.*?)_.*?_.*$', row['NA_nummer']) is not None:
-                archiveN = re.search(r'NL-HaNA_(.*?)_.*?_.*$', row['NA_nummer']).group(1)
-                inv = re.search(r'NL-HaNA_.*?_(.*?)_.*$', row['NA_nummer']).group(1)
-                archiveLink = 'https://www.nationaalarchief.nl/onderzoeken/archief/' \
-                              + archiveN + '/invnr/' \
-                              + inv + '/file/' \
-                              + row['NA_nummer'] + "?tab=download"
-
-                response = requests.get(archiveLink, headers={'Content-Type': 'application/xml'})
-                if response.status_code == 200:
-                    downloadLink = get_downlad_url(response.content, row['NA_nummer'] + ".jpg")
-                    print(downloadLink)
-                    download_image(downloadLink, str(row['NA_nummer']) + ".jpg", output_path)
-            else:
-                print(f"Image pattern not found for {row}")
+        for file in view_response.get("files", []):
+            if file["filename"] == image_filename:
+                return file["downloadURI"]
+    except KeyError as e:
+        print(f"Key error while extracting download URL: {e}")
+    return None
 
 
-def iter_excel_openpyxl(file):
-    workbook = openpyxl.load_workbook(file, read_only=True)
+def process_archive_link(archive_link, image_filename):
+    """
+    Fetch the archive link content and extract the download URL for the image.
+    
+    Args:
+        archive_link (str): URL of the archive page.
+        image_filename (str): Name of the image file.
+    
+    Returns:
+        str: The download URL for the image, or None if not found.
+    """
+    try:
+        response = requests.get(archive_link, headers={'Content-Type': 'application/xml'})
+        if response.status_code == 200:
+            parsed_json = parse_html_content(response.content)
+            if parsed_json:
+                return extract_download_url(parsed_json, image_filename)
+        else:
+            print(f"Failed to fetch archive link: {archive_link}, status code: {response.status_code}")
+    except Exception as e:
+        print(f"Error while processing archive link: {e}")
+    return None
+
+
+def parse_excel_rows(file_path):
+    """
+    Parse rows from an Excel file using openpyxl.
+    
+    Args:
+        file_path (str): Path to the Excel file.
+    
+    Yields:
+        dict: Row data as a dictionary.
+    """
+    workbook = openpyxl.load_workbook(file_path, read_only=True)
     rows = workbook.active.rows
     headers = [str(cell.value) for cell in next(rows)]
+
     for row in rows:
         yield dict(zip(headers, (cell.value for cell in row)))
 
 
-if __name__ == "__main__":
-    image_directory = f"../bronbeek_stamboeken"
-    if not os.path.exists(image_directory):
-        os.makedirs(image_directory)
+def download_images_from_excel(input_file, output_directory):
+    """
+    Download images listed in an Excel file by constructing archive URLs.
+    
+    Args:
+        input_file (str): Path to the Excel file containing image data.
+        output_directory (str): Directory to save the downloaded images.
+    """
+    start_time = time.perf_counter()
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
 
-    download_stamboeken('../Bronbeek_Data/Stamboeken_combined.xlsx', image_directory)
+    for row in tqdm(parse_excel_rows(input_file), desc="Processing rows"):
+        stamboeken_number = row.get("NA_nummer")
+        if stamboeken_number and (match := re.search(r'NL-HaNA_(.*?)_(.*?)_.*$', stamboeken_number)):
+            archive_number, inventory_number = match.groups()
+            archive_link = (
+                f"https://www.nationaalarchief.nl/onderzoeken/archief/"
+                f"{archive_number}/invnr/{inventory_number}/file/{stamboeken_number}?tab=download"
+            )
+            image_filename = f"{stamboeken_number}.jpg"
+            download_url = process_archive_link(archive_link, image_filename)
+
+            if download_url:
+                download_image(download_url, image_filename, output_directory)
+            else:
+                print(f"Download URL not found for {stamboeken_number}")
+        else:
+            print(f"Invalid NA_nummer pattern for row: {row}")
+
+    elapsed_time = time.perf_counter() - start_time
+    print(f"Completed downloading images in {elapsed_time:.2f} seconds.")
+
+
+if __name__ == "__main__":
+    INPUT_FILE = '../Bronbeek_Data/Stamboeken_combined.xlsx'
+    OUTPUT_DIRECTORY = '../bronbeek_stamboeken'
+    download_images_from_excel(INPUT_FILE, OUTPUT_DIRECTORY)
