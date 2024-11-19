@@ -24,7 +24,7 @@ def download_image(url, image_label, folder):
         print(f"An error occurred while downloading the image: {e}")
 
 
-def send_get_request_and_process_xml(record_url, headers=None):
+def send_get_request_and_process_xml(record_url, target, headers=None):
     namespaces = {
         'oai': 'http://www.openarchives.org/OAI/2.0/',
         'dc': 'http://dublincore.org/documents/dcmi-namespace/',
@@ -38,40 +38,35 @@ def send_get_request_and_process_xml(record_url, headers=None):
         if record_response.status_code == 200:
             record_root = etree.fromstring(record_response.content)
 
-            # we are interested in Control book 906.
-            target = "906"
             # Directory where images will be saved
             image_directory = f"../stamboek_{target}"
-
-            # Create the directory if it does not exist
             if not os.path.exists(image_directory):
                 os.makedirs(image_directory)
 
+            # path query to extract dao element for the given control book
             xpath_query = f'''//oai:did[
                                 oai:unitid[@identifier and text()={target}]
                             ]/oai:dao[@href]'''
-
             dao_elements = record_root.xpath(xpath_query, namespaces=namespaces)
 
-            for dao in dao_elements:
+
+            for dao in dao_elements: # Note: Typically, there should be just one element
+                # url to access control book
                 control_book_url = dao.attrib['href']
 
-                # Retrieved image from stamboek page-by-page
                 try:
                     control_book_response = requests.get(control_book_url, headers=headers)
 
                     if control_book_response.status_code == 200:
                         control_book_root = etree.fromstring(control_book_response.content)
 
-                        # xpath_query = '//mets:fileGrp[@USE="DEFAULT"]/mets:file/mets:FLocat/@xlink:href'
+                        # Retrieve ID & HREF for all images from given control book
                         xpath_query1 = '//mets:fileGrp[@USE="DEFAULT"]/mets:file/@ID | ' \
                                                     '//mets:fileGrp[@USE="DEFAULT"]/mets:file/mets:FLocat/@xlink:href '
-
                         query_results = control_book_root.xpath(xpath_query1, namespaces=namespaces)
 
                         """Convert consecutive pairs in a list to dictionaries with 'id' and 'href' keys."""
                         dictionary_list = []
-
                         # Iterate through the list two items at a time
                         for i in range(0, len(query_results), 2):
                             if i + 1 < len(query_results):
@@ -82,58 +77,32 @@ def send_get_request_and_process_xml(record_url, headers=None):
                                 }
                                 dictionary_list.append(pair_dict)
 
-                        # Print the result
                         for item in tqdm(dictionary_list):
                             print(f"{item['href']}\n")
 
                             # retrieve correct image label
                             xpath_query2 = f'''//mets:div[@ID="{item['id']}"]/@LABEL'''
                             query_results = control_book_root.xpath(xpath_query2, namespaces=namespaces)
-                            # print(query_results)
                             
                             download_image(item['href'], str(query_results[0]).split("/")[-1], image_directory)
 
                 except Exception as e:
                     print(f"An error occurred: {e}")
 
-            """
-            # Process specific XML elements (example: print all tags and values)
-            print("\nProcessed XML Data:")
-
-            for unitid in record_root.findall('.//oai:unitid[@identifier]', namespaces):
-                identifier_value = unitid.attrib['identifier']  # Get the 'identifier' attribute
-                unitid_text = unitid.text  # Get the text inside the 'unitid' tag
-                # print(f"Identifier: {identifier_value}, UnitID: {unitid_text}")
-                print(ET.dump(unitid.findall(".")))
-
-                # Check if identifier text matches any digit 70 to 75
-                if unitid_text.isdigit() and 70 <= int(unitid_text) <= 75:
-                    print("I AM HERE!")
-                    # Search for the sibling 'unitid' with 'audience' attribute and type='handle'
-                    # audience_unitid = unitid.find('./oai:following-sibling::oai:unitid[@audience="internal"][@type="handle"]', namespaces)
-                    parent_of_unitid = unitid.getroot()
-                    audience_unitid = parent_of_unitid.find('.//oai:unitid[@audience="internal"][@type="handle"]]',
-                                                            namespaces)
-                    # audience_unitid = unitid.itersiblings()
-
-                    if audience_unitid is not None:
-                        audience_value = unitid.text  # Get the text of the audience unitid
-                        print(f"Identifier: {identifier_value}, UnitID: {unitid_text}, Audience: {audience_value}")
-        
-
-        else:
-            print(f"Request failed with status code: {response.status_code}")
-            print(f"Error response: {response.text}")
-"""
     except Exception as e:
         print(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
-    # url = 'https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.50&metadataPrefix=oai_ead'
+    # PROVIDE THE URL TO ACCESS RECORD 
+    # E.g., Record --> 2.10.36.22
     url = "https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.36.22&metadataPrefix=oai_ead"
+    
+    # Record Contains individual Control book)
+    # PROVIDE CONTROL BOOK NUMBER OF INTEREST
+    control_book_no = "906"
 
     headers = {
         'Content-Type': 'application/xml',
     }
-    send_get_request_and_process_xml(url, headers=headers)
+    send_get_request_and_process_xml(url, control_book_no, headers=headers)
