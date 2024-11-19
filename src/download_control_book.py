@@ -4,15 +4,13 @@ from lxml import etree
 from tqdm import tqdm
 
 
-def download_image(url, image_label, folder):
+def download_image(url, image_label, output_path):
     try:
         # Send a GET request to the image URL
         response = requests.get(url, stream=True)
         # Check if the request was successful (status code 200)
         if response.status_code == 200:
-            # Extract the filename from the URL
-            # filename = os.path.join(folder, url.split("/")[-1]+".jpg")
-            filename = os.path.join(folder, image_label)
+            filename = os.path.join(output_path, image_label)
             # Save the image to the local file
             with open(filename, 'wb') as f:
                 for chunk in response.iter_content(1024):
@@ -22,7 +20,6 @@ def download_image(url, image_label, folder):
             print(f"Failed to download image from {url}. Status code: {response.status_code}")
     except Exception as e:
         print(f"An error occurred while downloading the image: {e}")
-
 
 def send_get_request_and_process_xml(record_url, target, headers=None):
     namespaces = {
