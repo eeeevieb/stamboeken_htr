@@ -21,6 +21,7 @@ def download_image(url, image_label, output_path):
     except Exception as e:
         print(f"An error occurred while downloading the image: {e}")
 
+
 def send_get_request_and_process_xml(record_url, target, headers=None):
     namespaces = {
         'oai': 'http://www.openarchives.org/OAI/2.0/',
@@ -41,11 +42,8 @@ def send_get_request_and_process_xml(record_url, target, headers=None):
                 os.makedirs(image_directory)
 
             # path query to extract dao element for the given control book
-            xpath_query = f'''//oai:did[
-                                oai:unitid[@identifier and text()={target}]
-                            ]/oai:dao[@href]'''
+            xpath_query = f'''//did[unitid[@identifier and text()={target}]]//dao[@href]'''
             dao_elements = record_root.xpath(xpath_query, namespaces=namespaces)
-
 
             for dao in dao_elements: # Note: Typically, there should be just one element
                 # url to access control book
@@ -93,11 +91,11 @@ def send_get_request_and_process_xml(record_url, target, headers=None):
 if __name__ == "__main__":
     # PROVIDE THE URL TO ACCESS RECORD 
     # E.g., Record --> 2.10.36.22
-    url = "https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.36.22&metadataPrefix=oai_ead"
+    url = "https://service.archief.nl/gaf/oai/!open_oai.OAIHandler?verb=ListRecords&set=2.10.50&metadataPrefix=oai_ead"
     
     # Record Contains individual Control book)
     # PROVIDE CONTROL BOOK NUMBER OF INTEREST
-    control_book_no = "906"
+    control_book_no = "71"
 
     headers = {
         'Content-Type': 'application/xml',
