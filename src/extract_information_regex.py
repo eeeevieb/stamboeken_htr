@@ -43,19 +43,19 @@ def extract_textequiv(file_path):
         print(f"Error parsing {file_path}. File may be malformed.")
 
 
-"""
-Pseudo-code:
-        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
-        | Case                      | Search Keyword or Pattern  | Description                                 | Regex Pattern                        | Captured Information            |
-        |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
-        | **1: Vader (Father)**     | `Vader`                   | Checks if line contains "Vader"             | `.*Vader\s+(.+)`                    | Text after "Vader" (Father's name) |
-        | **2: Moeder (Mother)**    | `Moeder`                  | Checks if line contains "Moeder"            | `.*Moeder\s+(.+)`                   | Text after "Moeder" (Mother's name) |
-        | **3: Geboorte datum (DOB)**| `Geboren`                | Checks if line contains "Geboren"           | `Geboren\s+(.+)`                    | Text after "Geboren" (Date of Birth) |
-        | **4: Geboorte Plaats (Place of Birth)** | `te`        | Checks if line starts with "te"             | `^te\s+(.+)`                        | Text after "te" (Place of Birth) |
-        | **5: Laatste Woonplaats (Last Residence)** | `laatst gewoond te` | Checks if line contains "laatst gewoond te" | `laatst\s*gewoond te\s+(.+)` | Text after "laatst gewoond te" (Last Residence) |
-        | **6: Campaigns**          | `4-digit year followed by place name`| Checks if starts with 4 digit and followed by strings | `\b(\d{4})\s+([a-zA-Z]+[\sa-zA-Z]*)` | 4 digit as Year, string as place |
-        | **7: Military Postings**          | `more than 1 date pattern`| Checks if strings has more than one date patterns | `.*?[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*` | String before the date as Context, date as Event Date |
-"""
+# """
+# Pseudo-code:
+#         |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
+#         | Case                      | Search Keyword or Pattern  | Description                                 | Regex Pattern                        | Captured Information            |
+#         |---------------------------|---------------------------|---------------------------------------------|--------------------------------------|---------------------------------|
+#         | **1: Vader (Father)**     | `Vader`                   | Checks if line contains "Vader"             | `.*Vader\s+(.+)`                    | Text after "Vader" (Father's name) |
+#         | **2: Moeder (Mother)**    | `Moeder`                  | Checks if line contains "Moeder"            | `.*Moeder\s+(.+)`                   | Text after "Moeder" (Mother's name) |
+#         | **3: Geboorte datum (DOB)**| `Geboren`                | Checks if line contains "Geboren"           | `Geboren\s+(.+)`                    | Text after "Geboren" (Date of Birth) |
+#         | **4: Geboorte Plaats (Place of Birth)** | `te`        | Checks if line starts with "te"             | `^te\s+(.+)`                        | Text after "te" (Place of Birth) |
+#         | **5: Laatste Woonplaats (Last Residence)** | `laatst gewoond te` | Checks if line contains "laatst gewoond te" | `laatst\s*gewoond te\s+(.+)` | Text after "laatst gewoond te" (Last Residence) |
+#         | **6: Campaigns**          | `4-digit year followed by place name`| Checks if starts with 4 digit and followed by strings | `\b(\d{4})\s+([a-zA-Z]+[\sa-zA-Z]*)` | 4 digit as Year, string as place |
+#         | **7: Military Postings**          | `more than 1 date pattern`| Checks if strings has more than one date patterns | `.*?[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*` | String before the date as Context, date as Event Date |
+# """
 
 
 def extract_information(xml_file, output_file):
@@ -95,10 +95,15 @@ def extract_information(xml_file, output_file):
         # WHEN HTR DONE SUCCESSFULLY!
         genealogy_info = {
             "Vader": None,
+            "vader region": None,
             "Moeder": None,
+            "Moeder region": None,
             "Geboorte datum": None,
+            "Geboortedatum region": None,
             "Geboorte Plaats": None,
-            "Laatste Woonplaats": None
+            "Geboorteplaats region": None,
+            "Laatste Woonplaats": None,
+            "Laatste woonplaats region": None
         }
         campaign_list = list()
         event_list = list()
@@ -111,6 +116,8 @@ def extract_information(xml_file, output_file):
             text_line_id = line.get("id")
             text_equiv_text = line.find("ns:TextEquiv/ns:PlainText", namespaces={
                 'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).text
+            text_coordinates = line.find("ns:Coords", namespaces={
+                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("points")
 
             if text_equiv_text is None:
                 continue
@@ -127,27 +134,32 @@ def extract_information(xml_file, output_file):
             vader_match = re.search(r'.*Vader\s+(.+)', text_equiv_text, re.IGNORECASE)
             if vader_match:
                 genealogy_info["Vader"] = vader_match.group(1).strip()
+                genealogy_info["Vader region"] = text_coordinates
 
             # Case 2: Extract Moeder
             moeder_match = re.search(r'.*Moeder\s+(.+)', text_equiv_text, re.IGNORECASE)
             if moeder_match:
                 genealogy_info["Moeder"] = moeder_match.group(1).strip()
+                genealogy_info["Moeder region"] = text_coordinates
 
             # Case 3: Extract Geboorte datum (e.g., "Geboren: 01-01-1900")
             geboorte_datum_match = re.search(r'Geboren\s+(.+)', text_equiv_text, re.IGNORECASE)
             if geboorte_datum_match:
                 genealogy_info["Geboorte datum"] = geboorte_datum_match.group(1).strip()
+                genealogy_info["Geboortedatum region"] = text_coordinates
 
             # Case 4: Extract Geboorte Plaats (e.g., "te Amsterdam")
             geboorte_plaats_match = re.search(r'^te\s+(.+)', text_equiv_text, re.IGNORECASE)
             if geboorte_plaats_match:
                 if genealogy_info["Geboorte Plaats"] is None:
                     genealogy_info["Geboorte Plaats"] = geboorte_plaats_match.group(1).strip()
+                    genealogy_info["Geboorteplaats region"] = text_coordinates
 
             # Case 5: Extract Laatste Woonplaats (e.g., "laatst gewoond te Rotterdam")
             laatste_woonplaats_match = re.search(r'laatst\s*gewoond te\s+(.+)', text_equiv_text, re.IGNORECASE)
             if laatste_woonplaats_match:
                 genealogy_info["Laatste Woonplaats"] = laatste_woonplaats_match.group(1).strip()
+                genealogy_info["Laatste woonplaats region"] = text_coordinates
 
             # Case 6: Extract campaign (e.g., "1809 Zeeland")
 
@@ -176,10 +188,15 @@ def extract_information(xml_file, output_file):
             csvwriter.writerow(
                 [''.join(xml_file.split('/')[-1].split(".")[:-1]),
                  genealogy_info["Vader"],
+                 genealogy_info["Vader region"],
                  genealogy_info["Moeder"],
+                 genealogy_info["Moeder region"],
                  genealogy_info["Geboorte datum"],
+                 genealogy_info["Geboortedatum region"],
                  genealogy_info["Geboorte Plaats"],
+                 genealogy_info["Geboorteplaats region"],
                  genealogy_info["Laatste Woonplaats"],
+                 genealogy_info["Laatste woonplaats region"],
                  ';'.join([str(dict) for dict in campaign_list]),
                  ';'.join([str(event) for event in event_list])])
 
@@ -193,7 +210,7 @@ def process_all_xml_files(folder):
     with open(output_file, 'w+') as f:
         csvwriter = csv.writer(f)
         # Write header row
-        csvwriter.writerow(["stamboeken", "Vader", "Moeder", "Geboorte datum", "Geboorte Plaats", "Laatste Woonplaats", "Campaigns"])
+        csvwriter.writerow(["stamboeken", "Vader", "Vader region", "Moeder", "Moeder region", "Geboorte datum", "Geboortedatum region", "Geboorte Plaats", "Geboorteplaats region", "Laatste Woonplaats", "Laatste woonplaats region", "Campaigns"])
 
     for root_dir, _, files in os.walk(folder):
         for file_name in sorted(files):
@@ -206,7 +223,7 @@ def process_all_xml_files(folder):
 
 
 # Example usage
-input_path = "../image_samples/page"
+input_path = '/root/Thesis/xmls/realish'
 output_path = '../output'
 
 process_all_xml_files(input_path)
