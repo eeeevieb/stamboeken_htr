@@ -23,7 +23,7 @@ def get_arguments():
 
     parser.add_argument("-i", "--image", help="Path to image", type=str, default=None)
     parser.add_argument("-x", "--xml", help="Path to xml file", type=str)
-    parser.add_argument("-r", "--resize", help="Resize image to the following dimensions: x y", nargs="+", type=int)
+    parser.add_argument("-r", "--resize", help="Whether the image should be resized or not, add if needs to be resized", action="store_true")
 
     args = parser.parse_args()
 
@@ -31,7 +31,7 @@ def get_arguments():
 
 def get_coords(xml_path):
     """
-    Get the coordinates of the difefrent regions from pageXML file
+    Get the coordinates of the different regions as well as (new) dimensions from pageXML file
 
         args: 
             xml_path: path to pageXML file
@@ -45,6 +45,11 @@ def get_coords(xml_path):
         # Load the XML content (from a file)
         root = etree.parse(xml_path)
 
+        image_width = root.find("ns:Page", namespaces={
+                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("imageWidth")
+        image_height = root.find("ns:Page", namespaces={
+                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("imageHeight")
+                
         # XPath query to get TextRegion coordinates
         result = root.xpath(
             '//ns:TextRegion',
@@ -67,7 +72,7 @@ def get_coords(xml_path):
                 label = label[1] if len(label) > 1 else ""
             else:
                 label = "no label"
-
+            
             # get coordinates
             text_coordinates = line.find("ns:Coords", namespaces={
                 'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("points")
@@ -77,23 +82,23 @@ def get_coords(xml_path):
                 coord_new = coord.split(",")
                 coord_new[0] = int(coord_new[0])
                 coord_new[1] = int(coord_new[1])
-                region_coords_full.append(tuple(coord_new))
+                region_coords_full.append((coord_new[0], coord_new[1]))
             
             coords.setdefault(label, []).append(region_coords_full)
 
     except etree.XMLSyntaxError:
         print(f"Error parsing {file_path}. File may be malformed.")
-
-    return coords
+    # print(coords)
+    return coords, (image_width, image_height)
 
 def visualize_regions(image_path, coords, resize):
     """
     Visualize regions with given coorndinates on given image
 
         args:
-            image_path: path to image on which to plot the regions
+            image_path: path to image on which to plot the regions, as a string
             coords: coordinates of the regions to plot, as a list of lists
-            resize: if the image needs to be resized, list of new dimensions [x,y], else resize is None
+            resize: if the image needs to be resized, as a boolean
     """
 
     image = Image.open(image_path)
@@ -101,9 +106,8 @@ def visualize_regions(image_path, coords, resize):
     # if resize is needed
     if resize:
         resized_img_path= '/root/Thesis/resized.jpg'
-        resized = image.resize((resize[0], resize[1]))
+        resized = image.resize((int(coords[1][0]), int(coords[1][1])))
         resized.save(resized_img_path)
-
         img = plt.imread(resized_img_path)
     else:
         img = plt.imread(image_path)
@@ -117,7 +121,7 @@ def visualize_regions(image_path, coords, resize):
     ax.imshow(img)
 
     # create list of the different polygons
-    for counter, item in enumerate(coords.items()):
+    for counter, item in enumerate(coords[0].items()):
         polygons = []
 
         for coord in item[1]:
@@ -134,7 +138,9 @@ def visualize_regions(image_path, coords, resize):
 
     ax.legend()
 
+    plt.savefig('/root/Thesis/visualizations/region_visualization.jpg')
     plt.show()
+
     return
 
 
