@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?><PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15 http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15/pagecontent.xsd">
+  <Metadata>
+    <Creator>Laypa</Creator>
+    <Created>2025-03-24T10:15:35</Created>
+    <LastChange>2025-03-24T10:17:14</LastChange>
+  </Metadata>
+  <Page imageFilename="NL-HaNA_2.10.50_1_0008_8.JPG" imageWidth="4195" imageHeight="1055">
+    <ReadingOrder>
+      <OrderedGroup id="orderedgroup_67f912d9-fa39-42e9-ae30-3bea2e037ef0">
+        <RegionRefIndexed index="0" regionRef="b9ac8791-de33-43fa-80fa-f4ef89dee2ac"/>
+        <RegionRefIndexed index="1" regionRef="region_32de96a5-0033-48bc-a579-c645541953ac"/>
+        <RegionRefIndexed index="2" regionRef="region_21c57e81-2d7b-40b4-b521-e39bd5c5b5b3"/>
+        <RegionRefIndexed index="3" regionRef="region_10b0a9cd-e43e-496c-a1a8-16f9a39bacf5"/>
+        <RegionRefIndexed index="4" regionRef="region_2a4d3b95-ea65-45ee-8211-7a5aeef10ff8"/>
+        <RegionRefIndexed index="5" regionRef="region_62cab912-57aa-4ef2-a773-9e134aa8345f"/>
+        <RegionRefIndexed index="6" regionRef="c7c1705a-54bc-4d8d-aec6-12aa1b47cd7f"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="b9ac8791-de33-43fa-80fa-f4ef89dee2ac" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Dutch">
+      <Coords points="150,214 749,214 749,395 150,395"/>
+      <TextLine id="b5dac577-4d47-41dc-a8fd-97d1c672a456" custom="readingOrder {index:0;}" primaryLanguage="Dutch">
+        <Coords points="150,215 476,214 496,230 640,230 688,278 749,278 749,347 640,344 603,372 540,395 376,395 360,382 320,382 308,371 236,372 224,383 150,383"/>
+        <Baseline points="184,331 234,329 634,327 684,327 716,330"/>
+        <Word id="word_42cdc3c0-c8b5-40df-819a-25c44c9a2c20">
+          <Coords points="183,296 233,294 634,292 684,292 719,295 715,340 684,337 634,337 234,339 184,341"/>
+          <TextEquiv>
+            <PlainText>Kvmjvt!Qijmjq!Bvhvtu</PlainText>
+            <Unicode>Kvmjvt!Qijmjq!Bvhvtu</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9071190357208252">
+          <PlainText>Kvmjvt!Qijmjq!Bvhvtu</PlainText>
+          <Unicode>Kvmjvt!Qijmjq!Bvhvtu</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_32de96a5-0033-48bc-a579-c645541953ac" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="Latin">
+      <Coords points="138,373 571,373 571,642 138,642"/>
+      <TextLine id="line_4c97a9b1-6f86-4e79-ae98-3e2ae1dfddc2" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+        <Coords points="138,389 212,390 232,374 259,373 358,381 435,457 509,457 533,481 543,474 558,489 571,489 571,558 474,555 466,563 339,563 267,626 188,642 138,637"/>
+        <Baseline points="172,545 222,547 522,545 538,541"/>
+        <Word id="word_568d5733-f70a-43cb-b7df-14dc27c1965f">
+          <Coords points="173,510 223,512 522,510 529,507 540,551 522,555 222,557 172,555"/>
+          <TextEquiv>
+            <PlainText>Fmjrofuu</PlainText>
+            <Unicode>Fmjrofuu</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9723839163780212">
+          <PlainText>Fmjrofuu</PlainText>
+          <Unicode>Fmjrofuu</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_21c57e81-2d7b-40b4-b521-e39bd5c5b5b3" custom="readingOrder {index:2;} structure {type:Text;}" primaryLanguage="Latin">
+      <Coords points="997,37 1631,37 1631,891 997,891"/>
+      <TextLine id="line_6941298d-cedd-4639-b42a-dbc4871d454c" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+        <Coords points="1004,37 1448,44 1473,65 1473,134 1090,134 1018,202 1004,199"/>
+        <Baseline points="1038,123 1088,121 1440,117"/>
+        <Word id="word_d9c5691e-9291-460f-8d86-4b9319fd2450">
+          <Coords points="1037,88 1087,86 1440,82 1440,127 1088,131 1038,133"/>
+          <TextEquiv>
+            <PlainText>Pfepsfo!ut![xpmmf</PlainText>
+            <Unicode>Pfepsfo!ut![xpmmf</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.8946865797042847">
+          <PlainText>Pfepsfo!ut![xpmmf</PlainText>
+          <Unicode>Pfepsfo!ut![xpmmf</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="line_514d1db0-e874-445f-ac00-1b60e2e81c18" custom="readingOrder {index:1;}" primaryLanguage="Italian">
+        <Coords points="997,200 1014,204 1055,168 1203,177 1452,175 1452,244 1439,252 1071,243 1035,248 1019,264 997,259"/>
+        <Baseline points="1031,228 1231,226 1419,227"/>
+        <Word id="word_1d996532-0871-462c-998a-c2fc74cc3e81">
+          <Coords points="1031,193 1231,191 1419,192 1419,237 1231,236 1031,238"/>
+          <TextEquiv>
+            <PlainText>efo!35!Nfj!28:4</PlainText>
+            <Unicode>efo!35!Nfj!28:4</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9966486096382141">
+          <PlainText>efo!35!Nfj!28:4</PlainText>
+          <Unicode>efo!35!Nfj!28:4</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="line_79892b5d-bfbb-4b49-872c-f2b15242e3ac" custom="readingOrder {index:2;}" primaryLanguage="Dutch">
+        <Coords points="997,260 1019,265 1039,246 1250,245 1270,264 1354,264 1393,277 1494,283 1494,352 1477,338 1103,347 1019,422 997,418"/>
+        <Baseline points="1031,333 1081,335 1431,333 1461,335"/>
+        <Word id="word_76ebbf94-8edb-456e-967d-d7bf37fa672a">
+          <Coords points="1032,298 1082,300 1431,298 1463,300 1460,345 1431,343 1081,345 1031,343"/>
+          <TextEquiv>
+            <PlainText>Wbefs!Qjfufs!Gsbodpjt</PlainText>
+            <Unicode>Wbefs!Qjfufs!Gsbodpjt</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9807050228118896">
+          <PlainText>Wbefs!Qjfufs!Gsbodpjt</PlainText>
+          <Unicode>Wbefs!Qjfufs!Gsbodpjt</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="dd68ac1e-0f79-41c8-943d-d15cdaed642f" custom="readingOrder {index:3;}" primaryLanguage="English">
+        <Coords points="998,423 1005,427 1028,412 1096,348 1482,348 1494,358 1546,358 1582,388 1631,389 1631,458 1578,458 1562,465 1552,460 1542,469 1335,469 1116,480 1060,475 1048,467 998,468"/>
+        <Baseline points="1032,444 1432,439 1532,439 1582,439 1598,441"/>
+        <Word id="word_11eb5ae4-de48-4f9d-b3ff-ee2e7c8dad9d">
+          <Coords points="1032,409 1432,404 1582,404 1602,406 1597,451 1582,449 1432,449 1032,454"/>
+          <TextEquiv>
+            <PlainText>npfefs!Befmbjef!Tusvccebh</PlainText>
+            <Unicode>npfefs!Befmbjef!Tusvccebh</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.864595353603363">
+          <PlainText>npfefs!Befmbjef!Tusvccebh</PlainText>
+          <Unicode>npfefs!Befmbjef!Tusvccebh</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="line_3443c0d9-2744-483f-bb4e-b686a6da37ac" custom="readingOrder {index:4;}" primaryLanguage="Dutch">
+        <Coords points="1000,469 1026,469 1058,497 1247,498 1247,568 1082,567 1019,626 1000,616"/>
+        <Baseline points="1034,552 1084,550 1214,551"/>
+        <Word id="word_a8da1b92-4103-4a18-8851-e88724106194">
+          <Coords points="1033,517 1083,515 1214,516 1214,561 1084,560 1034,562"/>
+          <TextEquiv>
+            <PlainText>Dpetejfotf</PlainText>
+            <Unicode>Dpetejfotf</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9750260710716248">
+          <PlainText>Dpetejfotf</PlainText>
+          <Unicode>Dpetejfotf</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="line_725c9cc8-48e8-4e0c-a249-dfbe5e4d94d6" custom="readingOrder {index:5;}" primaryLanguage="English">
+        <Coords points="1004,601 1018,600 1034,613 1239,607 1239,676 1054,676 1015,714 1004,708"/>
+        <Baseline points="1038,658 1206,659"/>
+        <Word id="word_450f0378-0ca8-4201-8373-9988d1bfe1e5">
+          <Coords points="1038,623 1206,624 1206,669 1038,668"/>
+          <TextEquiv>
+            <PlainText>Pdivxe!uf</PlainText>
+            <Unicode>Pdivxe!uf</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9688760638237">
+          <PlainText>Pdivxe!uf</PlainText>
+          <Unicode>Pdivxe!uf</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="f718af8b-1d26-4a2f-92a2-1720633e284f" custom="readingOrder {index:6;}" primaryLanguage="French">
+        <Coords points="1000,712 1134,716 1134,785 1089,786 1000,868"/>
+        <Baseline points="1034,769 1084,765 1101,768"/>
+        <Word id="word_aa212735-14e4-4ed7-a8dc-9b5b143e6105">
+          <Coords points="1031,734 1081,730 1107,733 1099,778 1085,775 1035,779"/>
+          <TextEquiv>
+            <PlainText>nps</PlainText>
+            <Unicode>nps</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9769972562789917">
+          <PlainText>nps</PlainText>
+          <Unicode>nps</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="line_468c243b-b1fd-4791-bb0b-69812c994453" custom="readingOrder {index:7;}" primaryLanguage="English">
+        <Coords points="1002,786 1016,781 1028,793 1041,793 1073,825 1221,822 1221,891 1028,891 1017,881 1002,885"/>
+        <Baseline points="1036,871 1136,874 1188,874"/>
+        <Word id="word_da2a4fe5-84fa-407b-b808-a3a8235fcfa8">
+          <Coords points="1037,836 1137,839 1188,839 1188,884 1136,884 1036,881"/>
+          <TextEquiv>
+            <PlainText>Ljoefsfo</PlainText>
+            <Unicode>Ljoefsfo</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9945396780967712">
+          <PlainText>Ljoefsfo</PlainText>
+          <Unicode>Ljoefsfo</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_10b0a9cd-e43e-496c-a1a8-16f9a39bacf5" custom="readingOrder {index:3;} structure {type:Text;}" primaryLanguage="English">
+      <Coords points="1534,1 2016,1 2016,172 1534,172"/>
+      <TextLine id="line_2259d3c2-f466-4a7a-9c34-a8453083779b" custom="readingOrder {index:0;}" primaryLanguage="English">
+        <Coords points="1534,5 1545,1 1576,29 1899,29 1923,53 2016,53 2016,122 1879,122 1856,112 1831,112 1807,128 1787,115 1740,115 1711,128 1694,115 1572,124 1555,112 1534,120"/>
+        <Baseline points="1568,104 1718,102 1968,103 1983,105"/>
+        <Word id="word_98c381c0-3b8a-4c4e-8a15-78c0b4e26d81">
+          <Coords points="1568,69 1718,67 1968,68 1987,70 1982,115 1968,113 1718,112 1568,114"/>
+          <TextEquiv>
+            <PlainText>Lbqjufjo!Bekvebou</PlainText>
+            <Unicode>Lbqjufjo!Bekvebou</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9842936396598816">
+          <PlainText>Lbqjufjo!Bekvebou</PlainText>
+          <Unicode>Lbqjufjo!Bekvebou</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="line_5f7f07dd-1801-453c-993a-5b3d7e87741c" custom="readingOrder {index:1;}" primaryLanguage="Dutch">
+        <Coords points="1575,124 1621,124 1637,112 1704,112 1716,124 1741,115 1788,115 1804,128 1848,112 1913,112 1921,103 1921,172 1575,171"/>
+        <Baseline points="1609,156 1759,154 1888,155"/>
+        <Word id="word_96a0574d-cf91-4b5a-8f24-0a6cb787d144">
+          <Coords points="1609,121 1759,119 1888,120 1888,165 1759,164 1609,166"/>
+          <TextEquiv>
+            <PlainText>23!Nbbsu!2925/</PlainText>
+            <Unicode>23!Nbbsu!2925/</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9958932399749756">
+          <PlainText>23!Nbbsu!2925/</PlainText>
+          <Unicode>23!Nbbsu!2925/</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_2a4d3b95-ea65-45ee-8211-7a5aeef10ff8" custom="readingOrder {index:4;} structure {type:Text;}" primaryLanguage="Latin">
+      <Coords points="2105,24 2743,24 2743,178 2105,178"/>
+      <TextLine id="c53ef982-f70b-4305-8336-63690be7aae2" custom="readingOrder {index:0;}" primaryLanguage="Dutch">
+        <Coords points="2105,30 2124,37 2131,30 2477,29 2491,41 2502,30 2722,24 2743,45 2743,115 2729,109 2723,115 2646,115 2602,136 2585,123 2527,124 2515,112 2135,116 2105,132"/>
+        <Baseline points="2139,109 2289,105 2639,102 2710,98"/>
+        <Word id="word_4af19cba-b0ab-4f5c-b184-dc91a4218e54">
+          <Coords points="2138,74 2288,70 2639,67 2708,63 2710,108 2639,112 2289,115 2139,119"/>
+          <TextEquiv>
+            <PlainText>nfu!3!Iu;!Tdijq!Benjb!ef!Svjkufs</PlainText>
+            <Unicode>nfu!3!Iu;!Tdijq!Benjb!ef!Svjkufs</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.7922890186309814">
+          <PlainText>nfu!3!Iu;!Tdijq!Benjb!ef!Svjkufs</PlainText>
+          <Unicode>nfu!3!Iu;!Tdijq!Benjb!ef!Svjkufs</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="aa5e5603-c790-4507-9619-6ce2010034ee" custom="readingOrder {index:1;}" primaryLanguage="Latin">
+        <Coords points="2197,114 2513,113 2529,125 2544,117 2588,122 2606,133 2641,104 2641,173 2267,170 2258,178 2197,178"/>
+        <Baseline points="2231,161 2431,156 2608,156"/>
+        <Word id="word_0e9ac2ab-f592-4188-a765-6793eef00461">
+          <Coords points="2230,126 2430,121 2608,121 2608,166 2431,166 2231,171"/>
+          <TextEquiv>
+            <PlainText>3:!Pdupc;!296!vju!Ufyfm</PlainText>
+            <Unicode>3:!Pdupc;!296!vju!Ufyfm</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9690104722976685">
+          <PlainText>3:!Pdupc;!296!vju!Ufyfm</PlainText>
+          <Unicode>3:!Pdupc;!296!vju!Ufyfm</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_62cab912-57aa-4ef2-a773-9e134aa8345f" custom="readingOrder {index:5;} structure {type:Text;}" primaryLanguage="English">
+      <Coords points="2738,233 3345,233 3345,513 2738,513"/>
+      <TextLine id="line_1b218e4e-3158-4870-b2d3-18215ab59648" custom="readingOrder {index:0;}" primaryLanguage="English">
+        <Coords points="2741,248 3089,248 3105,257 3146,233 3201,285 3345,282 3345,350 3273,350 3220,369 3197,357 3160,357 3104,343 3066,377 3049,373 3033,357 2985,358 2976,367 2970,361 2850,357 2831,350 2776,396 2741,409"/>
+        <Baseline points="2775,341 2825,338 3075,335 3275,335 3312,333"/>
+        <Word id="word_3b9376de-f386-49c1-bf7e-437a275267bd">
+          <Coords points="2773,306 2823,303 3075,300 3275,300 3310,298 3312,343 3275,345 3075,345 2826,348 2776,351"/>
+          <TextEquiv>
+            <PlainText>pwfsmfefo!uf!Cbubwjb*</PlainText>
+            <Unicode>pwfsmfefo!uf!Cbubwjb*</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9333297610282898">
+          <PlainText>pwfsmfefo!uf!Cbubwjb*</PlainText>
+          <Unicode>pwfsmfefo!uf!Cbubwjb*</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="af1a892b-48a1-4382-92b9-d032b7e8488e" custom="readingOrder {index:1;}" primaryLanguage="English">
+        <Coords points="2738,410 2753,410 2768,395 2778,395 2828,350 2851,358 2967,364 2974,371 2986,359 3034,358 3057,378 3072,375 3104,343 3129,353 3195,355 3208,367 3240,366 3257,355 3290,351 3290,420 3201,420 3194,427 3110,430 3079,442 3042,430 3033,439 2975,439 2959,447 2738,451"/>
+        <Baseline points="2772,407 2972,402 3222,401 3257,403"/>
+        <Word id="word_4b48f19f-566e-4d1b-b262-8f0ad9401a64">
+          <Coords points="2771,372 2971,367 3222,366 3259,368 3256,413 3222,411 2972,412 2772,417"/>
+          <TextEquiv>
+            <PlainText>efo!9f;!Gfcsvbsjk!2928/</PlainText>
+            <Unicode>efo!9f;!Gfcsvbsjk!2928/</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.9501272439956665">
+          <PlainText>efo!9f;!Gfcsvbsjk!2928/</PlainText>
+          <Unicode>efo!9f;!Gfcsvbsjk!2928/</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="ba90376d-5b31-40ea-b639-65fb615ccaf0" custom="readingOrder {index:2;}" primaryLanguage="English">
+        <Coords points="2776,453 2889,444 2960,449 2973,441 3059,441 3072,449 3096,438 3120,414 3284,420 3284,489 3072,494 3056,509 2776,513"/>
+        <Baseline points="2810,481 2910,480 3110,474 3160,474 3210,472 3251,472"/>
+        <Word id="word_52138546-9e9c-477f-be39-b55104f1c548">
+          <Coords points="2810,446 2910,445 3109,439 3251,437 3251,482 3110,484 2910,490 2810,491"/>
+          <TextEquiv>
+            <PlainText>wfsfoefe!41!Kvmjk!2931</PlainText>
+            <Unicode>wfsfoefe!41!Kvmjk!2931</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.8012298941612244">
+          <PlainText>wfsfoefe!41!Kvmjk!2931</PlainText>
+          <Unicode>wfsfoefe!41!Kvmjk!2931</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="c7c1705a-54bc-4d8d-aec6-12aa1b47cd7f" custom="readingOrder {index:6;} structure {type:Text;}" primaryLanguage="Dutch">
+      <Coords points="3376,175 3761,175 3761,356 3376,356"/>
+      <TextLine id="line_77c48c7f-b878-4544-bfc4-02f2b8a9b47f" custom="readingOrder {index:0;}" primaryLanguage="Dutch">
+        <Coords points="3376,175 3589,175 3613,183 3684,183 3724,203 3744,223 3761,223 3761,292 3661,289 3537,317 3504,340 3454,340 3433,351 3376,356"/>
+        <Baseline points="3410,344 3560,304 3660,282 3710,275 3728,275"/>
+        <Word id="word_8c9e35e0-0992-4840-bb96-8ba63ab3e775">
+          <Coords points="3401,310 3551,270 3652,248 3705,240 3728,240 3728,285 3711,285 3662,292 3563,314 3413,354"/>
+          <TextEquiv>
+            <PlainText>Xjggfst!PWj!mbvfefs</PlainText>
+            <Unicode>Xjggfst!PWj!mbvfefs</Unicode>
+          </TextEquiv>
+        </Word>
+        <TextEquiv conf="0.4278291165828705">
+          <PlainText>Xjggfst!PWj!mbvfefs</PlainText>
+          <Unicode>Xjggfst!PWj!mbvfefs</Unicode>
+        </TextEquiv>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+  </Page>
+</PcGts>

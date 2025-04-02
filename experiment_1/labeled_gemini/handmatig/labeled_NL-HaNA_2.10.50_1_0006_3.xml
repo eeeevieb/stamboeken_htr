@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PcGts xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15 http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15/pagecontent.xsd">
+  <Metadata>
+    <Creator>Laypa</Creator>
+    <Created>2025-03-25T13:52:56</Created>
+    <LastChange>2025-03-25T13:53:56</LastChange>
+  </Metadata>
+  <Page imageFilename="NL-HaNA_2.10.50_1_0006_3.JPG" imageWidth="4189" imageHeight="1073">
+    <ReadingOrder>
+      <OrderedGroup id="orderedgroup_f31e5c88-9b3f-4140-9083-03ff2f49164c">
+        <RegionRefIndexed index="0" regionRef="region_9817021b-79c1-403d-a775-e38bb886e02d"/>
+        <RegionRefIndexed index="1" regionRef="region_b251b501-9d89-4ca6-a2a0-4a1e74e2f45b"/>
+        <RegionRefIndexed index="2" regionRef="region_c47a35c5-02ff-4c93-8f78-fd2f180c0935"/>
+        <RegionRefIndexed index="3" regionRef="region_91b4f1ca-2d93-44f7-b43f-3281fcfd77a8"/>
+        <RegionRefIndexed index="4" regionRef="region_88a4a04a-1801-463b-a759-4f43b7458d13"/>
+        <RegionRefIndexed index="5" regionRef="region_bbd800b5-f5a5-4e86-8f31-ca31f20130de"/>
+        <RegionRefIndexed index="6" regionRef="region_750a6d07-4a16-440d-95e5-84a80b48d1db"/>
+      </OrderedGroup>
+    </ReadingOrder>
+    <TextRegion id="region_9817021b-79c1-403d-a775-e38bb886e02d" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
+      <Coords points="74,219 336,219 336,367 74,367"/>
+      <TextLine id="line_75b7dd22-9398-473a-913b-45ef1a909775" custom="readingOrder {index:0;} structure {type:Name;}" primaryLanguage="Latin">
+        <Coords points="74,228 109,228 118,236 132,236 140,228 311,228 336,253 336,290 290,358 257,351 227,367 212,355 198,367 186,355 161,351 145,367 129,355 101,351 83,338 74,338"/>
+        <Baseline points="92,326 132,323 207,322 278,318 316,326"/>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_b251b501-9d89-4ca6-a2a0-4a1e74e2f45b" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="Latin">
+      <Coords points="82,375 418,375 418,437 82,437"/>
+      <TextLine id="line_3b2189c6-61b6-4312-9436-f53064f20556" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
+        <Coords points="82,375 418,387 414,437 82,426"/>
+        <Baseline points="100,416 150,415 200,414 250,414 300,416 350,414 400,416"/>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_c47a35c5-02ff-4c93-8f78-fd2f180c0935" custom="readingOrder {index:2;} structure {type:Text;}" primaryLanguage="French">
+      <Coords points="457,57 771,57 771,212 457,212"/>
+      <TextLine id="line_768a3c63-2897-444a-b210-f295984d0b47" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="French">
+        <Coords points="457,89 515,66 553,66 566,84 671,84 678,77 690,90 712,77 747,77 771,107 771,144 754,160 723,156 549,156 531,184 457,184"/>
+        <Baseline points="475,145 552,142 627,145 684,146 740,149"/>
+        <TextStyle/>
+      </TextLine>
+      <TextLine id="line_5404f549-53f5-476b-9b2c-c3747a2e1e13" custom="readingOrder {index:1;} structure {type:Date;}" primaryLanguage="French">
+        <Coords points="468,134 517,126 627,132 680,143 705,137 747,162 754,156 754,193 744,204 528,200 508,212 468,200"/>
+        <Baseline points="486,183 536,183 636,181 726,183"/>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_91b4f1ca-2d93-44f7-b43f-3281fcfd77a8" custom="readingOrder {index:3;} structure {type:Text;}" primaryLanguage="Dutch">
+      <Coords points="449,232 957,232 957,379 449,379"/>
+      <TextLine id="line_7f5942a4-220c-404b-ba92-2195e044764e" custom="readingOrder {index:0;} structure {type:Name;}" primaryLanguage="Dutch">
+        <Coords points="449,294 503,246 584,246 608,257 626,257 671,232 784,253 882,253 902,272 923,264 957,294 957,331 923,358 882,358 748,379 721,353 683,353 663,372 621,372 605,358 573,358 542,379 515,353 449,353"/>
+        <Baseline points="467,317 594,319 802,321 852,319 902,320 940,320"/>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_88a4a04a-1801-463b-a759-4f43b7458d13" custom="readingOrder {index:4;} structure {type:Text;}" primaryLanguage="Latin">
+      <Coords points="454,377 774,377 774,468 454,468"/>
+      <TextLine id="line_89709e23-51b6-412a-a406-4099e7ef2021" custom="readingOrder {index:0;} structure {type:Name;}" primaryLanguage="Latin">
+        <Coords points="454,420 519,377 635,419 690,419 710,435 728,421 774,421 774,468 454,468"/>
+        <Baseline points="472,448 522,446 632,444 682,448 760,448"/>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_bbd800b5-f5a5-4e86-8f31-ca31f20130de" custom="readingOrder {index:5;} structure {type:Text;}" primaryLanguage="Dutch">
+      <Coords points="997,189 1316,189 1316,298 997,298"/>
+      <TextLine id="line_51b8e1bb-a751-494d-a01b-e4b132b66816" custom="readingOrder {index:0;} structure {type:Place;}" primaryLanguage="Dutch">
+        <Coords points="997,218 1024,197 1047,201 1060,192 1145,192 1173,223 1217,222 1234,210 1274,210 1284,220 1316,243 1316,281 1282,298 1214,298 1006,285 997,285"/>
+        <Baseline points="1015,264 1162,261 1301,266"/>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+    <TextRegion id="region_750a6d07-4a16-440d-95e5-84a80b48d1db" custom="readingOrder {index:6;} structure {type:Text;}" primaryLanguage="Dutch">
+      <Coords points="1323,253 1703,253 1703,382 1323,382"/>
+      <TextLine id="line_e51fa1ae-5b0d-4a1c-814c-ed9155b12731" custom="readingOrder {index:0;} structure {type:Date;}" primaryLanguage="Dutch">
+        <Coords points="1323,306 1358,268 1437,272 1445,263 1477,256 1488,263 1512,253 1624,253 1649,283 1666,272 1703,306 1703,343 1663,371 1490,363 1429,377 1405,377 1385,361 1350,361 1323,336"/>
+        <Baseline points="1341,324 1441,316 1541,317 1641,322 1689,323"/>
+        <TextStyle/>
+      </TextLine>
+    </TextRegion>
+  </Page>
+</PcGts>
