@@ -61,7 +61,7 @@ prompt_2 = rf"The following pageXML file contains regions, textlines and baselin
 
 if __name__ == "__main__":
     if LLAMA_1 or LLAMA_2:
-        llama_client = Groq(api_key="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")
+        llama_client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 
         if LLAMA_1:
             ## Does not work atm due to Llama accepting only one image ##
@@ -97,7 +97,7 @@ if __name__ == "__main__":
                 write.writerows(results)
 
     if GEMINI_1 or GEMINI_2:
-        gemini_client = genai.Client(api_key="AIzaSyAIhcBwuErBl5LVIB7P01j_sROHjPe2fCQ")
+        gemini_client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
         if GEMINI_1:
             results = [[]]
