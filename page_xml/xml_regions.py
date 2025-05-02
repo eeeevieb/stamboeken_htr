@@ -72,6 +72,7 @@ class XMLRegions:
             "merge_regions": cfg.PREPROCESS.REGION.MERGE_REGIONS,
             "region_type": cfg.PREPROCESS.REGION.REGION_TYPE,
         }
+        # print('yello', cfg.PREPROCESS.REGION.MERGE_REGIONS)
         return ret
 
     # REVIEW is this the best place for this
@@ -87,18 +88,25 @@ class XMLRegions:
         """
         # HACK hardcoded regions if none are given
         republic_regions = [
-            "marginalia",
-            "page-number",
-            "resolution",
-            "date",
-            "index",
-            "attendance",
-            "Resumption",
-            "resumption",
-            "Insertion",
-            "insertion",
+            "Name",
+        "Award",
+        "Birth Place",
+        "Birth Date",
+        "Father",
+        "Mother",
+        "Religion",
+        "Marriage Location",
+        "Spouse",
+        "Children",
+        "Rank",
+        "Ship",
+        "Departure",
+        "Death Date",
+        "Death Place",
+        "Retirement",
+        "Repatriation",
         ]
-        republic_merge_regions = ["resolution:Resumption,resumption,Insertion,insertion"]
+
         parser = argparse.ArgumentParser(add_help=False)
 
         region_args = parser.add_argument_group("Regions")
@@ -156,14 +164,17 @@ class XMLRegions:
             dict[str, str]: keys are the target class, values are the class to be merged
         """
         if self._merge_regions_internal is None or len(self._merge_regions_internal) == 0:
+            # print("should be here right", self._merge_regions_internal)
             return {}
-        to_merge = {}
-        for c in self._merge_regions_internal:
-            parent, childs = c.split(":")
-            if parent in self._regions_internal:
-                to_merge[parent] = childs.split(",")
-            else:
-                raise argparse.ArgumentTypeError(f'Malformed argument {c}\nRegion "{parent}" to merge is not defined as region')
+        else:
+            # print("but am here?", self._merge_regions_internal)
+            to_merge = {}
+            for c in self._merge_regions_internal:
+                parent, childs = c.split(":")
+                if parent in self._regions_internal:
+                    to_merge[parent] = childs.split(",")
+                else:
+                    raise argparse.ArgumentTypeError(f'Malformed argument {c}\nRegion "{parent}" to merge is not defined as region')
 
         seen_childs = set()
         for childs in to_merge.values():
@@ -186,10 +197,10 @@ class XMLRegions:
         Returns:
             dict[str, str]: Mapping from region to region type
         """
-        region_types = {"full_page": "TextRegion"}
+        region_types = {"full_page": "TextLine"}
         if self._region_type_internal is None or len(self._region_type_internal) == 0:
             for region in self._regions_internal:
-                region_types[region] = "TextRegion"
+                region_types[region] = "TextLine"
             return region_types
 
         for c in self._region_type_internal:
@@ -204,7 +215,7 @@ class XMLRegions:
                     )
         for region in self._regions_internal:
             if region not in region_types.keys():
-                region_types[region] = "TextRegion"
+                region_types[region] = "TextLine"
         return region_types
 
     def _build_regions_to_classes(self) -> dict[str, int]:
