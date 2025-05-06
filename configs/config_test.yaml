@@ -1,4 +1,4 @@
-_BASE_: /root/Thesis/laypa/configs/segmentation/baseline/baseline_all_augments.yaml
+_BASE_: ./segmentation/baseline/baseline_all_augments.yaml
 
 OUTPUT_DIR: ./output/region
 
