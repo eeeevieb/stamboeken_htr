@@ -136,7 +136,7 @@ dmypy.json
 .idea/
 
 # Output
-output/
+# output/
 runs/
 
 # Pretrained_models
