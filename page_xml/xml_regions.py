@@ -105,6 +105,7 @@ class XMLRegions:
         "Death Place",
         "Retirement",
         "Repatriation",
+        "Text",
         ]
 
         parser = argparse.ArgumentParser(add_help=False)
