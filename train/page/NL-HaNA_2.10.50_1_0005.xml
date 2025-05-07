@@ -59,7 +59,7 @@
     </ReadingOrder>
     <TextRegion id="de7a6157-0a44-400c-bde8-5c86b6a28922" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Dutch">
       <Coords points="414,313 557,313 557,476 414,476"/>
-      <TextLine id="bba26f49-6f48-4804-ad04-25af8f7ec596" custom="readingOrder {index:0;}" primaryLanguage="Dutch">
+      <TextLine id="bba26f49-6f48-4804-ad04-25af8f7ec596" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Dutch">
         <Coords points="414,313 452,317 476,330 520,329 557,362 557,401 414,396"/>
         <Baseline points="433,386 483,387 539,392"/>
         <Word id="word_a3bb61dc-35b9-4eb1-8c19-c81e23fb1cb8">
@@ -75,7 +75,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="line_4dd851fa-cf75-4bb6-a2a0-ccdb91fc7193" custom="readingOrder {index:1;}" primaryLanguage="English">
+      <TextLine id="line_4dd851fa-cf75-4bb6-a2a0-ccdb91fc7193" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="442,395 495,395 517,413 530,414 530,454 504,476 459,475 442,460"/>
         <Baseline points="461,444 512,444"/>
         <Word id="word_cbe0ce89-a58d-43b2-bd06-e15f4ea08995">
@@ -94,7 +94,7 @@
     </TextRegion>
     <TextRegion id="b84a5fd4-b979-42a6-811c-2f528f32dd6b" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="597,512 1290,512 1290,633 597,633"/>
-      <TextLine id="line_198f5cab-8295-454e-aea7-096b3f0464e4" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_198f5cab-8295-454e-aea7-096b3f0464e4" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="597,517 699,512 918,516 926,524 1094,524 1153,579 1233,579 1290,590 1290,629 1261,633 723,624 597,629"/>
         <Baseline points="616,600 766,606 1166,615 1272,620"/>
         <Word id="word_63823829-d4c2-4b20-ae65-6dcd57f4a779">
@@ -164,7 +164,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="b42f476a-f5cd-460d-a87f-5e004c6fe7a9" custom="readingOrder {index:2;}" primaryLanguage="Latin">
+      <TextLine id="b42f476a-f5cd-460d-a87f-5e004c6fe7a9" custom="readingOrder {index:2;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="541,1275 647,1270 663,1283 708,1275 735,1293 755,1293 775,1310 804,1302 804,1341 791,1341 740,1379 691,1379 667,1367 563,1371 541,1379"/>
         <Baseline points="560,1330 660,1328 786,1332"/>
         <Word id="word_33d63234-dfc0-4335-8b5c-8c85c5dc33b4">
@@ -237,7 +237,7 @@
     </TextRegion>
     <TextRegion id="region_227a80d2-34de-4636-89fc-d881e563f9aa" custom="readingOrder {index:6;} structure {type:Text;}" primaryLanguage="Dutch">
       <Coords points="511,2108 1192,2108 1192,2383 511,2383"/>
-      <TextLine id="c36357e0-23ac-4295-9d13-d91aed72a027" custom="readingOrder {index:0;}" primaryLanguage="Dutch">
+      <TextLine id="c36357e0-23ac-4295-9d13-d91aed72a027" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Dutch">
         <Coords points="512,2113 610,2108 654,2137 690,2137 706,2121 745,2137 803,2125 830,2148 930,2148 944,2157 1093,2152 1119,2178 1119,2218 1102,2218 1090,2229 1042,2229 1030,2220 744,2221 735,2213 582,2213 512,2221"/>
         <Baseline points="531,2204 581,2200 931,2204 1101,2209"/>
         <Word id="word_c6633a6f-e38a-4d35-ab36-2b536a02eac7">
@@ -307,7 +307,7 @@
     </TextRegion>
     <TextRegion id="c4895c7c-31ff-4f38-9d1b-7bcb733501b4" custom="readingOrder {index:8;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1437,810 1542,810 1542,938 1437,938"/>
-      <TextLine id="line_34a64588-d3cf-44c8-9ff5-d8fe84315205" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_34a64588-d3cf-44c8-9ff5-d8fe84315205" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1437,813 1448,810 1494,856 1542,856 1542,895 1486,896 1437,938"/>
         <Baseline points="1456,887 1524,886"/>
         <Word id="word_626fac0a-8dc7-422b-be56-c85b57883525">
@@ -326,7 +326,7 @@
     </TextRegion>
     <TextRegion id="c61e2f45-75ad-433e-87b7-815d1419c178" custom="readingOrder {index:9;} structure {type:Text;}" primaryLanguage="German">
       <Coords points="1462,955 1583,955 1583,1008 1462,1008"/>
-      <TextLine id="line_9adc98c9-cf63-4619-9b95-c26e93961de7" custom="readingOrder {index:0;}" primaryLanguage="German">
+      <TextLine id="line_9adc98c9-cf63-4619-9b95-c26e93961de7" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="German">
         <Coords points="1462,955 1583,964 1583,1003 1480,1008 1462,1000"/>
         <Baseline points="1481,995 1565,994"/>
         <Word id="word_51fd59d4-bd80-455c-9da9-d2f3464206e9">
@@ -345,7 +345,7 @@
     </TextRegion>
     <TextRegion id="region_08ceb480-28e5-4cff-bf86-07aa9ee151a0" custom="readingOrder {index:10;} structure {type:Text;}" primaryLanguage="German">
       <Coords points="1438,1064 1600,1064 1600,1151 1438,1151"/>
-      <TextLine id="b628d587-bce0-4ba1-a56d-6905f5aa3ff9" custom="readingOrder {index:0;}" primaryLanguage="German">
+      <TextLine id="b628d587-bce0-4ba1-a56d-6905f5aa3ff9" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="German">
         <Coords points="1438,1080 1460,1064 1567,1064 1600,1071 1600,1110 1480,1111 1438,1151"/>
         <Baseline points="1457,1104 1557,1103 1582,1101"/>
         <Word id="word_c559985b-ffe3-4f8b-a87e-c90ed93ca36d">
@@ -364,7 +364,7 @@
     </TextRegion>
     <TextRegion id="af701cf3-fcf0-4113-b85e-f39d1874be3c" custom="readingOrder {index:11;} structure {type:Text;}" primaryLanguage="Latin">
       <Coords points="1412,2406 1526,2406 1526,2492 1412,2492"/>
-      <TextLine id="line_1ab028b1-ef9b-4d53-ac8c-a7463ac2c87c" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+      <TextLine id="line_1ab028b1-ef9b-4d53-ac8c-a7463ac2c87c" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="1412,2426 1442,2406 1526,2407 1526,2446 1517,2438 1508,2447 1458,2450 1412,2492"/>
         <Baseline points="1431,2437 1508,2437"/>
         <Word id="word_812b2485-9247-410c-b175-1bf02ac7cc97">
@@ -383,7 +383,7 @@
     </TextRegion>
     <TextRegion id="c5daf1da-bbe7-435c-b4da-d1cb563ad92f" custom="readingOrder {index:12;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1413,2505 1609,2505 1609,2600 1413,2600"/>
-      <TextLine id="line_78d53d7c-95cb-446e-8430-c74c646165af" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_78d53d7c-95cb-446e-8430-c74c646165af" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1413,2534 1454,2505 1485,2514 1521,2509 1529,2515 1609,2515 1609,2554 1458,2560 1413,2600"/>
         <Baseline points="1432,2542 1591,2545"/>
         <Word id="word_b925c781-e925-4885-bb10-60031cfc896a">
@@ -402,7 +402,7 @@
     </TextRegion>
     <TextRegion id="bc168ad3-f437-4b52-b32e-1ac84ea0e504" custom="readingOrder {index:13;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1407,2833 1521,2833 1521,2933 1407,2933"/>
-      <TextLine id="b053fa1e-e412-4d37-bc1c-a9896aedd9ee" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="b053fa1e-e412-4d37-bc1c-a9896aedd9ee" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1407,2833 1468,2892 1521,2894 1521,2933 1407,2930"/>
         <Baseline points="1426,2924 1503,2924"/>
         <Word id="word_263c689e-8e62-4909-ade2-b626384aa313">
@@ -421,7 +421,7 @@
     </TextRegion>
     <TextRegion id="b532f38d-ca1f-4843-8e20-23a883b15419" custom="readingOrder {index:14;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="470,3111 1628,3111 1628,3444 470,3444"/>
-      <TextLine id="line_2041ebbb-9614-4282-814e-ca6f4a9cf3d1" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+      <TextLine id="line_2041ebbb-9614-4282-814e-ca6f4a9cf3d1" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="470,3144 560,3143 592,3111 615,3111 648,3140 688,3120 1055,3124 1120,3179 1399,3186 1425,3212 1425,3252 1408,3263 1379,3255 1300,3259 1287,3248 984,3248 936,3252 884,3293 872,3283 860,3287 820,3274 624,3274 592,3251 470,3251"/>
         <Baseline points="489,3227 539,3229 589,3233 739,3236 939,3239 1139,3240 1339,3238 1389,3240 1407,3243"/>
         <Word id="word_00083af1-abd6-4c61-8995-1062dc005c94">
@@ -488,7 +488,7 @@
     </TextRegion>
     <TextRegion id="region_086a7255-84f8-4e46-90ba-9c6b2dda16aa" custom="readingOrder {index:15;} structure {type:Text;}" primaryLanguage="Latin">
       <Coords points="1409,3419 1513,3419 1513,3469 1409,3469"/>
-      <TextLine id="line_59360709-58ca-4ca8-acd5-77c7a00b1120" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+      <TextLine id="line_59360709-58ca-4ca8-acd5-77c7a00b1120" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="1409,3419 1419,3427 1485,3427 1508,3435 1513,3430 1513,3468 1409,3469"/>
         <Baseline points="1428,3459 1495,3459"/>
         <Word id="word_6a46ac8e-1f84-48be-864f-4ad8b66bc837">
@@ -507,7 +507,7 @@
     </TextRegion>
     <TextRegion id="region_65b4750d-3500-451d-afa7-c50e1f1c02c8" custom="readingOrder {index:16;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1406,3531 1605,3531 1605,3620 1406,3620"/>
-      <TextLine id="line_52d0d3b2-8cae-476f-a754-fc5898956669" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_52d0d3b2-8cae-476f-a754-fc5898956669" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1406,3547 1428,3531 1605,3538 1605,3577 1512,3576 1456,3620 1406,3619"/>
         <Baseline points="1425,3569 1475,3567 1575,3566 1587,3568"/>
         <Word id="word_8f974236-db58-411f-b68c-4264c2ce0fa5">
@@ -526,7 +526,7 @@
     </TextRegion>
     <TextRegion id="a224cff5-e52b-4c93-82b2-68c42cf2bf56" custom="readingOrder {index:17;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1442,694 1676,694 1676,811 1442,811"/>
-      <TextLine id="c7f11af0-13ff-4403-99e8-99e574500c5c" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="c7f11af0-13ff-4403-99e8-99e574500c5c" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1442,698 1449,694 1480,725 1504,740 1524,740 1536,752 1676,750 1676,789 1464,792 1442,811"/>
         <Baseline points="1461,778 1658,780"/>
         <Word id="word_91325c47-8e8d-429b-a0e5-d4fa189aa597">
@@ -545,7 +545,7 @@
     </TextRegion>
     <TextRegion id="region_787167e8-f90e-4629-ab30-9154ed770c9f" custom="readingOrder {index:18;} structure {type:Text;}" primaryLanguage="Italian">
       <Coords points="1435,1277 1646,1277 1646,1379 1435,1379"/>
-      <TextLine id="line_4029e507-756f-4e87-8612-a8a4e970968d" custom="readingOrder {index:0;}" primaryLanguage="Italian">
+      <TextLine id="line_4029e507-756f-4e87-8612-a8a4e970968d" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Italian">
         <Coords points="1435,1277 1585,1277 1597,1288 1625,1284 1646,1294 1646,1333 1509,1331 1481,1340 1435,1379"/>
         <Baseline points="1454,1319 1504,1318 1628,1324"/>
         <Word id="word_134e603f-7954-4895-b21e-e338bd0e566b">
@@ -564,7 +564,7 @@
     </TextRegion>
     <TextRegion id="region_737df528-b8de-48cc-99af-219663c37a89" custom="readingOrder {index:19;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1428,1485 1639,1485 1639,1587 1428,1587"/>
-      <TextLine id="line_44950432-9e6f-49bd-b9f1-51fb657ba3f6" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_44950432-9e6f-49bd-b9f1-51fb657ba3f6" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1428,1525 1474,1485 1566,1488 1586,1501 1639,1502 1639,1541 1482,1548 1450,1579 1428,1587"/>
         <Baseline points="1447,1531 1621,1532"/>
         <Word id="word_d6edba08-65e2-4e92-b8d4-dae30e2202c9">
@@ -583,7 +583,7 @@
     </TextRegion>
     <TextRegion id="region_4a212900-f6a5-482f-a59a-42ce0a3c8596" custom="readingOrder {index:20;} structure {type:Text;}" primaryLanguage="French">
       <Coords points="1413,1804 1647,1804 1647,1955 1413,1955"/>
-      <TextLine id="c4147ac1-9cf6-4910-a0d8-183dcd37aa25" custom="readingOrder {index:0;}" primaryLanguage="Italian">
+      <TextLine id="c4147ac1-9cf6-4910-a0d8-183dcd37aa25" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Italian">
         <Coords points="1413,1839 1427,1844 1467,1804 1479,1804 1487,1812 1518,1812 1566,1859 1630,1859 1647,1871 1647,1909 1467,1913 1423,1955 1413,1948"/>
         <Baseline points="1432,1902 1482,1900 1582,1901 1629,1900"/>
         <Word id="word_0a0fc31e-55ca-42c2-8d3e-777d761e7fb4">
@@ -621,7 +621,7 @@
     </TextRegion>
     <TextRegion id="region_24f2d15c-08e6-4410-9b89-621e52acfc7b" custom="readingOrder {index:22;} structure {type:Text;}" primaryLanguage="Latin">
       <Coords points="1416,2180 1641,2180 1641,2270 1416,2270"/>
-      <TextLine id="line_71eac581-f618-422a-94db-a3a4fab138f6" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+      <TextLine id="line_71eac581-f618-422a-94db-a3a4fab138f6" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="1416,2180 1553,2188 1561,2196 1624,2201 1641,2195 1641,2233 1596,2233 1577,2243 1456,2235 1421,2270 1416,2267"/>
         <Baseline points="1435,2221 1623,2224"/>
         <Word id="word_6b88a41c-8131-4622-af31-525caa168a66">
@@ -640,7 +640,7 @@
     </TextRegion>
     <TextRegion id="f6bb6e53-365f-4c6b-9b0e-229914a70242" custom="readingOrder {index:23;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1416,2287 1633,2287 1633,2373 1416,2373"/>
-      <TextLine id="line_729da367-de4a-4f7b-b683-274dad5764f1" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_729da367-de4a-4f7b-b683-274dad5764f1" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1416,2299 1422,2303 1446,2287 1633,2300 1633,2339 1545,2339 1529,2354 1438,2354 1416,2373"/>
         <Baseline points="1435,2328 1615,2330"/>
         <Word id="word_8caa4f9a-10ea-4933-aa05-191f751cf189">
@@ -678,7 +678,7 @@
     </TextRegion>
     <TextRegion id="e42078ae-79cb-4360-9d24-4c9b7d21ce1e" custom="readingOrder {index:25;} structure {type:Text;}" primaryLanguage="Latin">
       <Coords points="1434,484 2001,484 2001,665 1434,665"/>
-      <TextLine id="line_2df37281-201d-484c-a60e-f5fedf3b7ff5" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+      <TextLine id="line_2df37281-201d-484c-a60e-f5fedf3b7ff5" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="1434,484 1447,484 1468,503 1484,507 1884,515 1892,523 1992,527 2001,532 2001,571 1988,581 1969,567 1664,566 1625,559 1451,566 1434,555"/>
         <Baseline points="1453,549 1553,549 1953,556 1983,562"/>
         <Word id="word_cd499d81-8add-47cc-8a3a-a2c7186aed34">
@@ -694,7 +694,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="line_7f64bb1b-4cb8-4491-aee8-5f1a0718fde2" custom="readingOrder {index:1;}" primaryLanguage="French">
+      <TextLine id="line_7f64bb1b-4cb8-4491-aee8-5f1a0718fde2" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="French">
         <Coords points="1467,556 1764,563 1772,571 1824,572 1832,564 1972,568 1985,579 1985,620 1972,627 1848,626 1736,622 1694,611 1467,611"/>
         <Baseline points="1486,601 1536,598 1786,603 1936,607 1967,610"/>
         <Word id="word_e065d1ad-fdcb-4b82-a289-af62f8791e02">
@@ -710,7 +710,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="line_46228397-c093-4a8e-ab0d-67a7e8c3e026" custom="readingOrder {index:2;}" primaryLanguage="French">
+      <TextLine id="line_46228397-c093-4a8e-ab0d-67a7e8c3e026" custom="readingOrder {index:2;} structure {type:Text;}" primaryLanguage="French">
         <Coords points="1463,610 1564,609 1576,618 1608,618 1619,610 1692,610 1719,621 1799,626 1799,665 1463,660"/>
         <Baseline points="1482,650 1532,648 1682,651 1781,656"/>
         <Word id="word_65f15aee-bcf4-4d1f-a5f2-b89a8fe3655a">
@@ -824,7 +824,7 @@
     </TextRegion>
     <TextRegion id="b1214dea-de28-44e5-a296-d631d30ec644" custom="readingOrder {index:31;} structure {type:Text;}" primaryLanguage="Italian">
       <Coords points="1957,668 2383,668 2383,792 1957,792"/>
-      <TextLine id="line_19df1fad-413e-4e1b-ba70-54d858e34078" custom="readingOrder {index:0;}" primaryLanguage="Italian">
+      <TextLine id="line_19df1fad-413e-4e1b-ba70-54d858e34078" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Italian">
         <Coords points="1957,668 1970,668 1989,684 2019,685 2037,703 2334,688 2383,733 2383,773 2330,777 2314,789 1957,792"/>
         <Baseline points="1976,762 2026,759 2076,759 2276,764 2326,765 2365,763"/>
         <Word id="word_055bab97-e622-49c1-8017-3c4ebc16c3be">
@@ -1031,7 +1031,7 @@
     </TextRegion>
     <TextRegion id="region_2cc9365b-b303-45ad-b7bd-82d264717491" custom="readingOrder {index:36;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="1989,513 2490,513 2490,670 1989,670"/>
-      <TextLine id="ae786692-b4b1-436d-b099-dffd3be5bc86" custom="readingOrder {index:0;}" primaryLanguage="Latin">
+      <TextLine id="ae786692-b4b1-436d-b099-dffd3be5bc86" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="2008,514 2293,513 2325,525 2340,516 2353,525 2403,525 2436,556 2455,553 2470,568 2481,559 2481,598 2472,606 2436,609 2381,594 2008,583"/>
         <Baseline points="2027,573 2327,581 2463,589"/>
         <Word id="word_496ed97b-d80a-4d0c-a03c-636966c51aee">
@@ -1047,7 +1047,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="b77c2a21-4294-4314-8cfd-107cbcb4889b" custom="readingOrder {index:1;}" primaryLanguage="English">
+      <TextLine id="b77c2a21-4294-4314-8cfd-107cbcb4889b" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="1989,597 2020,596 2035,604 2126,596 2433,603 2453,619 2490,617 2490,657 2471,670 2450,654 2154,654 2095,651 2088,644 1989,648"/>
         <Baseline points="2008,634 2308,640 2458,645 2472,647"/>
         <Word id="word_8c7fdfd3-6519-43b0-9805-68ff3aa0000d">
@@ -1101,7 +1101,7 @@
     </TextRegion>
     <TextRegion id="region_6e46c06e-7b63-4d71-be78-3057d26c8e99" custom="readingOrder {index:38;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="2464,475 3080,475 3080,649 2464,649"/>
-      <TextLine id="fb9fff23-3c74-4a21-ba29-c425d98d821c" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="fb9fff23-3c74-4a21-ba29-c425d98d821c" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="2464,495 2494,495 2523,507 2534,496 2558,492 2697,492 2735,483 2749,492 2800,492 2812,480 2840,476 3035,475 3080,484 3080,524 3067,528 2991,525 2944,529 2932,540 2871,544 2854,533 2820,533 2805,543 2749,540 2733,548 2673,540 2649,552 2628,544 2617,555 2597,544 2581,544 2565,556 2518,548 2464,595"/>
         <Baseline points="2483,540 2633,535 3062,515"/>
         <Word id="word_88c99e2c-96f9-494d-a4f6-b0f6c3964e55">
@@ -1117,7 +1117,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="f90bbeff-e1f3-4a1c-99f9-5c1717640ff7" custom="readingOrder {index:1;}" primaryLanguage="English">
+      <TextLine id="f90bbeff-e1f3-4a1c-99f9-5c1717640ff7" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="2495,550 2530,546 2573,554 2581,546 2598,546 2619,553 2634,542 2648,553 2690,557 2705,546 2796,534 2929,542 2941,530 2957,533 2968,526 3077,538 3074,581 2964,581 2951,588 2940,578 2816,589 2681,589 2657,597 2613,593 2601,605 2588,597 2495,597"/>
         <Baseline points="2514,590 3014,567 3059,568"/>
         <Word id="word_571d42a2-9c2c-42ad-af93-ec87d91b57c7">
@@ -1133,7 +1133,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="line_706fc999-9b0d-4143-91fe-2c155d2bfc7c" custom="readingOrder {index:2;}" primaryLanguage="Dutch">
+      <TextLine id="line_706fc999-9b0d-4143-91fe-2c155d2bfc7c" custom="readingOrder {index:2;} structure {type:Text;}" primaryLanguage="Dutch">
         <Coords points="2503,599 2585,595 2600,607 2612,595 2815,591 2914,579 2941,598 2952,590 2971,591 2971,630 2503,649"/>
         <Baseline points="2522,637 2953,621"/>
         <Word id="word_6f999d5f-235d-4262-b790-e5c4be59b9e1">
@@ -1152,7 +1152,7 @@
     </TextRegion>
     <TextRegion id="region_7558ade2-d404-4b95-8d5e-0eff7d534940" custom="readingOrder {index:39;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="3078,459 3703,459 3703,625 3078,625"/>
-      <TextLine id="c4bf1bae-48a9-46f6-ba19-c0b725f18a23" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="c4bf1bae-48a9-46f6-ba19-c0b725f18a23" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="3078,478 3092,467 3243,467 3255,459 3291,466 3519,470 3527,478 3547,466 3642,466 3654,475 3690,469 3703,476 3703,516 3695,508 3686,517 3523,517 3515,525 3347,517 3338,525 3078,520"/>
         <Baseline points="3097,514 3547,507 3685,507"/>
         <Word id="word_2430e887-cb67-4c0c-a2dd-cca6f1b70cba">
@@ -1168,7 +1168,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="c715a2b0-81bb-4e98-a344-62ac607f0ef0" custom="readingOrder {index:1;}" primaryLanguage="Latin">
+      <TextLine id="c715a2b0-81bb-4e98-a344-62ac607f0ef0" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="Latin">
         <Coords points="3095,523 3352,527 3360,519 3623,519 3638,530 3699,528 3699,569 3693,574 3443,567 3272,578 3227,573 3208,586 3153,585 3141,573 3095,574"/>
         <Baseline points="3114,566 3164,563 3364,562 3614,557 3681,559"/>
         <Word id="word_5fe6282c-e718-4568-b476-51cbbd0feb85">
@@ -1184,7 +1184,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="fac4a687-84d6-4515-8e36-a80d565fc5c6" custom="readingOrder {index:2;}" primaryLanguage="English">
+      <TextLine id="fac4a687-84d6-4515-8e36-a80d565fc5c6" custom="readingOrder {index:2;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="3093,575 3140,575 3151,586 3210,587 3228,571 3265,579 3294,571 3561,567 3572,578 3629,580 3629,619 3093,625"/>
         <Baseline points="3112,615 3162,612 3212,613 3512,608 3611,610"/>
         <Word id="word_c42a8762-9dbf-47bd-925c-768e4152c898">
@@ -1289,7 +1289,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="cb2e0309-a4d5-4d43-93aa-6cc7a6b5c64c" custom="readingOrder {index:1;}" primaryLanguage="English">
+      <TextLine id="cb2e0309-a4d5-4d43-93aa-6cc7a6b5c64c" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="3245,2151 3331,2147 3346,2162 3375,2163 3375,2203 3368,2210 3272,2213 3245,2237"/>
         <Baseline points="3264,2195 3314,2192 3357,2193"/>
         <Word id="word_82bbeaa6-35b6-4698-ad3f-651f99dd6064">
@@ -1340,7 +1340,7 @@
         </TextEquiv>
         <TextStyle/>
       </TextLine>
-      <TextLine id="d4917000-35a5-411d-8808-364024fb4872" custom="readingOrder {index:1;}" primaryLanguage="English">
+      <TextLine id="d4917000-35a5-411d-8808-364024fb4872" custom="readingOrder {index:1;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="3089,3049 3115,3041 3189,3041 3232,3081 3270,3058 3307,3058 3322,3073 3355,3054 3465,3061 3474,3068 3535,3051 3627,3051 3639,3061 3651,3053 3701,3053 3714,3066 3728,3068 3728,3106 3679,3105 3672,3112 3559,3108 3531,3121 3456,3109 3403,3121 3139,3113 3095,3152 3089,3148"/>
         <Baseline points="3108,3106 3158,3104 3258,3104 3458,3102 3658,3095 3710,3097"/>
         <Word id="word_7845a3e5-84c0-4796-b26a-72458f3f170a">
@@ -1375,7 +1375,7 @@
     </TextRegion>
     <TextRegion id="region_85d35765-c188-44ca-91bc-f0e4b608410c" custom="readingOrder {index:44;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="601,322 1748,322 1748,514 601,514"/>
-      <TextLine id="line_9115e40f-fef4-4347-a0a5-303668a4cf95" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_9115e40f-fef4-4347-a0a5-303668a4cf95" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="601,339 753,330 762,339 775,336 794,355 799,351 830,382 863,378 899,351 947,343 1151,342 1169,359 1176,355 1215,394 1255,403 1319,398 1374,411 1414,387 1479,322 1551,322 1635,402 1701,398 1748,428 1748,468 1739,463 1687,474 1575,470 1567,462 1479,462 1440,495 1375,497 1359,491 1348,502 1315,502 1303,514 1163,509 1155,501 1111,501 1104,494 1059,494 1049,487 879,491 868,483 804,479 627,478 601,491"/>
         <Baseline points="620,438 770,444 1370,447 1570,452 1720,458 1730,459"/>
         <Word id="word_54fda3d2-b4e9-4df6-9d45-4e472c540353">
@@ -1394,7 +1394,7 @@
     </TextRegion>
     <TextRegion id="region_723016dd-6be5-4bd4-9263-35d3d5155226" custom="readingOrder {index:45;} structure {type:Text;}" primaryLanguage="English">
       <Coords points="3888,491 4337,491 4337,580 3888,580"/>
-      <TextLine id="line_061d54fa-15eb-47ba-8132-cc52c5b92710" custom="readingOrder {index:0;}" primaryLanguage="English">
+      <TextLine id="line_061d54fa-15eb-47ba-8132-cc52c5b92710" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="English">
         <Coords points="3888,491 4240,491 4256,506 4308,510 4324,524 4337,524 4337,563 4329,557 4300,563 4280,576 3888,580"/>
         <Baseline points="3907,555 4207,551 4319,554"/>
         <Word id="word_0c3d2429-b6f4-4727-bb6a-204dfac15efd">
@@ -1413,7 +1413,7 @@
     </TextRegion>
     <TextRegion id="bfdde002-39f9-4674-814d-9bebb77e62d1" custom="readingOrder {index:46;} structure {type:Text;}" primaryLanguage="Dutch">
       <Coords points="4421,326 4580,326 4580,421 4421,421"/>
-      <TextLine id="line_7283ac75-bf66-4a4f-856e-dd2f164ac691" custom="readingOrder {index:0;}" primaryLanguage="Dutch">
+      <TextLine id="line_7283ac75-bf66-4a4f-856e-dd2f164ac691" custom="readingOrder {index:0;} structure {type:Text;}" primaryLanguage="Dutch">
         <Coords points="4421,335 4515,334 4551,326 4563,336 4580,336 4580,376 4551,377 4495,421 4421,417"/>
         <Baseline points="4440,363 4562,366"/>
         <Word id="word_f91f5d9f-c2a6-4a9c-90ea-1286fc432697">
