@@ -33,7 +33,7 @@ PREPROCESS:
         "Death Place",
         "Retirement",
         "Repatriation",
-        "Text"
+        "None"
       ]
     MERGE_REGIONS: None
     REGION_TYPE: []
