@@ -1,4 +1,4 @@
-_BASE_: ./segmentation/baseline/baseline_all_augments.yaml
+_BASE_: ./segmentation/baseline/baseline_general.yaml
 
 OUTPUT_DIR: ./output/region
 
