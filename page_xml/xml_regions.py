@@ -88,7 +88,7 @@ class XMLRegions:
         """
         # HACK hardcoded regions if none are given
         republic_regions = [
-            "Name",
+        "Name",
         "Award",
         "Birth Place",
         "Birth Date",
@@ -105,7 +105,7 @@ class XMLRegions:
         "Death Place",
         "Retirement",
         "Repatriation",
-        None,
+        "Text",
         ]
 
         parser = argparse.ArgumentParser(add_help=False)
