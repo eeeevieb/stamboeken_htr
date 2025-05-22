@@ -29,6 +29,39 @@ docker pull loghi/docker.loghi-tooling
 scripts/inference-pipeline.sh ../images_samples/
 ```
 
+# Training a laypa model
+### Create environment
+
+Create the environment from the environment.yml file in the laypa folder:
+```bash
+cd laypa
+conda env create -f environment.yml
+```
+
+### Train model
+Training data can be found in stamboeken_htr/training_data. 
+
+Train/test/val split can be made using laypa tooling:
+
+```bash
+python tooling/dataset_creation.py -i stamboeken_htr/training_data -o training_data_split
+```
+
+To train the model using these data:
+```bash
+python train.py -c configs/config_stamboeken.yaml -t training_data_split/train_filelist.txt -v training_data_split/val_filelist.txt
+```
+
+Specify number of GPUs with ```--num_gpus NUM_GPUS```. Default is 1.
+The numbber of iterations, checkpoints and images per batch can also be specified, using the ```--opts``` argument.
+
+Example command for 2 gpus, 32 images per batch, checkpoint periond of 1000 iterations and 10,000 iterations total. Defaults can be found in laypa/configs/config_stamboeken.yaml.
+```bash
+python train.py -c configs/config_stamboeken.yaml -t training_data_split/train_filelist.txt -v training_data_split/val_filelist.txt --num-gpus=2 --opts SOLVER.IMS_PER_BATCH 32 SOLVER.CHECKPOINT_PERIOD 1000 SOLVER.MAX_ITER 10000
+```
+
+For full documentation of the train function, see the [laypa documentation](https://github.com/stefanklut/laypa).
+
 # Scripts
 ## HTR
 1. ```bash
