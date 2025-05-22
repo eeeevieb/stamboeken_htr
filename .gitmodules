@@ -1,3 +1,6 @@
 [submodule "loghi"]
 	path = loghi
 	url = git@github.com:knaw-huc/loghi.git
+[submodule "laypa"]
+	path = laypa
+	url = https://github.com/eeeevieb/laypa.git
