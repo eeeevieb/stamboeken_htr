@@ -9,9 +9,15 @@
 
 cd laypa
 
+echo cd
+
 conda activate laypa
 
+echo env
+
 python train.py -c configs/config_stamboeken.yaml -t train -v val --num-gpus 1 --opts SOLVER.IMS_PER_BATCH 32 SOLVER.MAX_ITER 1
+
+echo train
 
 
 
