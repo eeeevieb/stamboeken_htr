@@ -1,17 +1,16 @@
-from typing import Any
 import os
 from lxml import etree
 import regex
 import csv
-import openpyxl
 import argparse
 import spacy
+import re
 
 def get_arguments():
-    parser = argparse.ArgumentParser(description="Visualization of regions")
+    parser = argparse.ArgumentParser(description="Labels regions of a transcript in PageXML format")
 
-    parser.add_argument("-i", "--input", help="Path to input folder", type=str, default=None)
-    parser.add_argument("-o", "--output", help="Path to output folder", type=str)
+    parser.add_argument("-i", "--input", help="Path to input folder", type=str, required=True)
+    parser.add_argument("-o", "--output", help="Path to output folder", type=str, required=True)
 
     args = parser.parse_args()
 
@@ -53,13 +52,13 @@ def label_line(line, label):
 def label_xml(xml_file, output_file):
     """
         Labels TextLines in an XML file with the following lables:
-            - Name          - Marriage Location - Ship
-            - Award         - Spouse            - Departure
-            - Birth Place   - Children          - Death Date
-            - Birth Date    - Rank              - Death Place
-            - Father        - Decision          - Retirement
-            - Mother        - Appointment       - Date
-            - Religion      - Rank date         - Place
+            - Name          - Marriage Location - Death Place
+            - Award         - Spouse            - Retirement
+            - Birth Place   - Children          - Repatriation
+            - Birth Date    - Rank              - Text
+            - Father        - Ship     
+            - Mother        - Departure
+            - Religion      - Death Date
 
         Creates a folder named 'labeled' in given output folder containting the labeled pageXML files.
 
@@ -73,15 +72,17 @@ def label_xml(xml_file, output_file):
     """
 
     ner = spacy.load('nl_core_news_lg') # NL, accuracy
-    # ner = spacy.load('nl_core_news_sm') # NL, efficiency
-    # ner = spacy.load('xx_sent_ud_sm') # multilang, accuracy
-    # ner = spacy.load('xx_ent_wiki_sm') # mulitlang, efficiency
 
     try:
         tree = etree.parse(xml_file)
         root = tree.getroot()
 
         new_tree = etree.ElementTree(root)
+
+        width = new_tree.find(
+            'ns:Page', 
+            namespaces={'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}
+        ).get('imageWidth')
 
         result = new_tree.xpath(
             '//ns:TextRegion',
@@ -95,15 +96,16 @@ def label_xml(xml_file, output_file):
             print(f"No TextEquiv tag found in {file_path}. Logged in image_htr_error.txt.")
             return
             
-
+        # Check the text of a region for context needed to label a line
         for region in result:
             died = False
             rank = False
+            retired = False
+            repatriated = False
 
             text_elements = region.xpath('.//ns:TextEquiv/ns:PlainText', 
                              namespaces={'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
 
-            # Join all text to check whether the word 'overleden' or a rank is mentioned
             all_text = [el.text for el in text_elements if el.text]
             all_text = ', '.join(all_text)
 
@@ -111,29 +113,44 @@ def label_xml(xml_file, output_file):
             if overleden_match:
                 died = True
             
-            rank_match = regex.search(r'\b(lieut|adjudant|maj(?:r|or)|comman|komman|chirurg|inspect|chef|kapit|directeur|klerk|apothek|luit|kolonel){e<=2}', all_text, regex.IGNORECASE)
-            if rank_match:
+            rank_match = re.search(r'\b(lieut|adjudant|maj(?:r|or)|comman|komman|chirurg|inspect|chef|kapit|directeur|klerk|apothek|luiten|kolonel)', all_text, re.IGNORECASE)
+            staf_match = regex.search(r'(Staf van den){e<=2}', all_text, regex.IGNORECASE)
+
+            if rank_match and not staf_match:
                 rank = True
 
+            pensioen_match = regex.search(r'(pensioen){e<=2}', all_text, regex.IGNORECASE)
+            if pensioen_match:
+                retired = True
+
+            repatriated_match = regex.search(r'(gerepatrieerd){e<=2},', all_text, regex.IGNORECASE)
+            if repatriated_match:
+                repatriated = True
+
             # Find all TextLines
-            text_lines = region.xpath('.//ns:TextLine[ns:TextEquiv[not(ancestor::ns:Word)]]',namespaces={'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
+            text_lines = region.xpath('.//ns:TextLine',namespaces={'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
 
             for line in text_lines:
-                text_equiv_text = line.find("ns:TextEquiv/ns:PlainText", namespaces={
-                    'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).text
+                text_equiv_text_el = line.find("ns:TextEquiv/ns:PlainText", namespaces={
+                    'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
+                if text_equiv_text_el is not None:
+                    text_equiv_text = text_equiv_text_el.text
+                else:
+                    text_equiv_text = None
                 text_coordinates = line.find("ns:Coords", namespaces={
                     'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("points")
                 region = line
 
                 if text_equiv_text is None:
+                    label_line(line, 'Text')
                     continue
 
-                # Case 1: Vader
+                # Case 1: Father
                 vader_match = regex.search(r'^(Vader){e<=1}\s+\p{Lu}\w*(?:\s+\w+)*$', text_equiv_text, regex.IGNORECASE)
                 if vader_match:
                     label_line(line, 'Father')
 
-                # Case 2: Moeder
+                # Case 2: Mother
                 moeder_match = regex.search(r'^(Moeder){e<=1}\s+\p{Lu}\w*(?:\s+\w+)*$', text_equiv_text, regex.IGNORECASE)
                 if moeder_match:
                     label_line(line, 'Mother')
@@ -141,7 +158,10 @@ def label_xml(xml_file, output_file):
                 # Case 3: Birth date
                 geboorte_datum_match = regex.search(r'^(den (?=.*\b\d{4}\b)\S+(?: \S+)*){e<=1}', text_equiv_text, regex.IGNORECASE)
                 if geboorte_datum_match:
-                    label_line(line, 'Birth Date')
+                    if not died:
+                        coord = text_coordinates.split(',')[0]
+                        if int(coord) < int(width) / 3:
+                            label_line(line, 'Birth Date')
 
                 # Case 4: Birth place
                 geboorte_plaats_match = regex.search(r'^(Geboren){e<=2}\s(te){e<=1}\s+\w+(?:\s+\w+)*$', text_equiv_text)
@@ -173,15 +193,21 @@ def label_xml(xml_file, output_file):
                 if kinderen_match:
                     label_line(line, 'Children')
 
-                # Case 10: Decision
+                # Case 10: Decisions
                 besluit_match = regex.search(r'\b(besl){e<=1}\b', text_equiv_text, regex.IGNORECASE)
                 if besluit_match:
-                    label_line(line, 'Decision')
+                    if retired:
+                        label_line(line, 'Retirement')
+                    elif rank:
+                        label_line(line, 'Rank')
+                    elif repatriated:
+                        label_line(line, 'Repatriation')
                 
-                # Case 11: Appointment
+                # Case 11: Appointments
                 aangesteld_match = regex.search(r'(aangest){e<=1}', text_equiv_text, regex.IGNORECASE)
                 if aangesteld_match:
-                    label_line(line, 'Appointment')
+                    if rank:
+                        label_line(line, 'Rank')
 
                 # Case 12: Death date
                 if died:
@@ -189,7 +215,7 @@ def label_xml(xml_file, output_file):
                     if death_date_match:
                         label_line(line, 'Death Date')
 
-                # Case 13: Pensioen
+                # Case 13: Retirement
                 pensioen_match = regex.search(r'(pensioen){e<=2}', text_equiv_text, regex.IGNORECASE)
                 if pensioen_match:
                     label_line(line, 'Retirement')
@@ -204,30 +230,38 @@ def label_xml(xml_file, output_file):
                 if religion_match:
                     label_line(line, 'Religion')
 
-                # Case 16: All dates (full date)
+                # Case 16: Repatriation
+                repatriated_match = regex.search(r'(gerepatrieerd){e<=2}', text_equiv_text, regex.IGNORECASE)  
+                # print(text_equiv_text)              
+                if repatriated_match:
+                    label_line(line, 'Repatriation')
+
+                # Case 17: All dates (full date)
                 date_match = regex.search(r'([0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*){e<=1}', text_equiv_text, regex.IGNORECASE)
                 if date_match:
                     if rank:
-                        label_line(line, 'Rank Date')
-                    if not already_labeled(line):
-                        label_line(line, 'Date')
+                        label_line(line, 'Rank')
+                    elif retired:
+                        label_line(line, 'Retirement')
+                    elif repatriated:
+                        label_line(line, 'Repatriation')
 
-                # Case 17: All dates (only year)
+                # Case 18: All dates (only year)
                 year_match = regex.search(r'\b1[1-9]{3}\b', text_equiv_text, regex.IGNORECASE)
                 if year_match:
-                    label_line(line, 'Date')
+                    if repatriated:
+                        label_line(line, 'Repatriation')
+                    elif retired:
+                        label_line(line, 'Retirement')
 
-                # Case 18: Name starting with Baron
+                # Case 19: Name starting with Baron
                 name_match = regex.search(r'(Baron){e<=1}', text_equiv_text, regex.IGNORECASE)
                 if name_match:
                     label_line(line, 'Name')
 
-                # Case 19: Rank info
-                # One of the later categories to be labeled because it match many words when a few mistakes are permitted
-                if rank:
-                    function_match = regex.search(r'\b(lieut|adjudant|maj(?:oor|or)|comman|komman|chirurg|inspect|chef|kapit|directeur|klerk|apothek|luit|kolonel){e<=1}', text_equiv_text, regex.IGNORECASE)
-                    if function_match:
-                        label_line(line, 'Rank')
+                # Case 20: Rank info
+                if not already_labeled(line) and rank:
+                    label_line(line,'Rank')
 
                 # NER
                 if not already_labeled(line):
@@ -235,26 +269,31 @@ def label_xml(xml_file, output_file):
 
                     labels = set()
                     for ent in doc.ents:
-                        # Case 20: Name (all names that have not yet been labeled)
+                        # Case 21: Name (all names that have not yet been labeled)
                         if ent.label_ == 'PERSON':
-                            label_line(line, 'Name')
+                            non_name_match = regex.search(r'(staf|dienst|demissie)', text_equiv_text, regex.IGNORECASE)
+                            if non_name_match == None: # text does not contain 'staf', 'dienst', 'demissie'
+                                coord = text_coordinates.split(',')[0]
+                                # Label if name on the left fifth of the page, names in other columns should get different labels
+                                if int(coord) < int(width) / 5:
+                                    label_line(line, 'Name')
+
                         # Places
                         if ent.label_ == 'GPE':
+                            non_place_match = regex.search(r'(namen)', text_equiv_text, regex.IGNORECASE)
                             # Case 21: Place of death
                             if died:
                                 label_line(line, 'Death Place')
-                            # Case 22: Place (general)
-                            else:
-                                label_line(line, 'Place')
-                        # Case 23: Date (the dates that are left)
-                        if ent.label_ == 'DATE':
-                            label_line(line, 'Date')
+            
+                # Labl qny line without a label with label Text
+                if not already_labeled(line):
+                    label_line(line, 'Text')
 
         # Save file
         new_file = xml_file.split('/')[-1].strip('_fixed.xml')
         output_dir = f"{output_file}/labeled"
         os.makedirs(output_dir, exist_ok=True)
-        new_tree.write(f'{output_file}/labeled/{new_file}_labeled.xml', pretty_print=True, xml_declaration=True, encoding="UTF-8")
+        new_tree.write(f'{output_file}/labeled/{new_file}.xml', pretty_print=True, xml_declaration=True, encoding="UTF-8")
         print(f'File saved at {output_file}/labeled/{new_file}_labeled.xml')
 
     except etree.XMLSyntaxError:
@@ -272,7 +311,6 @@ def process_all_xml_files(folder_input, folder_output):
                 label_xml(file_path, folder_output)
 
 def main(args):
-    # Example usage
     input_path = args.input
     output_path = args.output
 
