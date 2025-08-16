@@ -1,25 +1,16 @@
-# import cv2
-import numpy as np
 import matplotlib.pyplot as plt 
-from typing import Any
-
-import os
 from lxml import etree
 import re
-import csv
-import geopandas as gpd
 from shapely.geometry import Polygon
-
 from PIL import Image 
-
 import argparse
 
 
 def get_arguments():
     parser = argparse.ArgumentParser(description="Visualization of regions")
 
-    parser.add_argument("-i", "--image", help="Path to image", type=str, default=None)
-    parser.add_argument("-x", "--xml", help="Path to xml file", type=str)
+    parser.add_argument("-i", "--image", help="Path to image", type=str, required=True)
+    parser.add_argument("-x", "--xml", help="Path to xml file", type=str, required=True)
     parser.add_argument("-r", "--resize", help="Whether the image should be resized or not, add if needs to be resized", action="store_true")
 
     args = parser.parse_args()
@@ -34,7 +25,7 @@ def get_coords(xml_path):
         args: 
             xml_path: path to pageXML file
         returns: 
-            dict of different lists of coordinates for each label
+            dict of all lists of coordinates for each label
     """
 
     coords = []
@@ -48,7 +39,6 @@ def get_coords(xml_path):
                 'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("imageWidth")
         image_height = root.find("ns:Page", namespaces={
                 'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("imageHeight")
-        print(image_width, image_height)
                 
         # XPath query to get TextRegion coordinates
         result = root.xpath(
@@ -63,7 +53,12 @@ def get_coords(xml_path):
             label = line.get("custom")
             if label:
                 label = label.split("structure", 1)
-                label = label[1] if len(label) > 1 else "no label"
+                if len(label) > 1:
+                    label = label[1] 
+                    label = re.findall(r"type:([^;]*);", label)[0]
+                else:
+                    label = "no label"
+                
             else:
                 label = "no label"
             
@@ -105,8 +100,11 @@ def visualize_regions(image_path, coords, resize):
     else:
         img = plt.imread(image_path)
 
-    # dict for colors:
-    colors = {0: "red", 1: "green", 2: "blue", 3: "yellow", 4: "orange", 5: "purple", 6: "pink", 7: "cyan"}
+    # dict for colors
+    colors = {"Name": "red", "Award": "green", "Birth Place": "blue", "Birth Date": "yellow", "Father": "orange",
+                    "Mother": "purple", "Religion": "pink", "Marriage Location": "cyan", "Spouse": "violet",
+                    "Children": "fuchsia", "Rank": "steelblue", "Ship": "lime", "Departure": "darkgoldenrod", "Death Date": "teal",
+                    "Death Place": "darkviolet", "Retirement": "darkred", "Repatriation": "greenyellow", "Text": "beige"}
     used_labels = set()
 
     # plot image
@@ -124,10 +122,11 @@ def visualize_regions(image_path, coords, resize):
 
         # loop through polygons and plot them
         for polygon in polygons:
-            label = item[0] if item[0] not in used_labels else None
-            x, y = polygon.exterior.xy  # Extract coordinates
-            ax.plot(x, y, color=colors[counter], linewidth=0.8, label=label)  # Outline
-            ax.fill(x, y, color=colors[counter], alpha=0.3)  # Fill with transparency
+            label = item[0]
+            label_legend = item[0] if item[0] not in used_labels else None
+            x, y = polygon.exterior.xy
+            ax.plot(x, y, color=colors[label], linewidth=0.8, label=label_legend)
+            ax.fill(x, y, color=colors[label], alpha=0.3)
             used_labels.add(item[0])
 
     ax.legend(bbox_to_anchor=(1.05, 1.0), loc='upper left')
