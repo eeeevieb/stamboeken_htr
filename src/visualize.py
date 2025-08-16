@@ -1,6 +1,6 @@
 # import cv2
 import numpy as np
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
 from typing import Any
 
 import os
@@ -10,7 +10,7 @@ import csv
 import geopandas as gpd
 from shapely.geometry import Polygon
 
-from PIL import Image 
+from PIL import Image
 
 import argparse
 
@@ -20,7 +20,9 @@ def get_arguments():
 
     parser.add_argument("-i", "--image", help="Path to image", type=str, default=None)
     parser.add_argument("-x", "--xml", help="Path to xml file", type=str)
-    parser.add_argument("-r", "--resize", help="Whether the image should be resized or not, add if needs to be resized", action="store_true")
+    parser.add_argument(
+        "-r", "--resize", help="Whether the image should be resized or not, add if needs to be resized", action="store_true"
+    )
 
     args = parser.parse_args()
 
@@ -31,9 +33,9 @@ def get_coords(xml_path):
     """
     Get the coordinates of the different regions as well as (new) dimensions from pageXML file
 
-        args: 
+        args:
             xml_path: path to pageXML file
-        returns: 
+        returns:
             dict of different lists of coordinates for each label
     """
 
@@ -44,16 +46,17 @@ def get_coords(xml_path):
         root = etree.parse(xml_path)
 
         # get image dimensions from xml
-        image_width = root.find("ns:Page", namespaces={
-                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("imageWidth")
-        image_height = root.find("ns:Page", namespaces={
-                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("imageHeight")
+        image_width = root.find(
+            "ns:Page", namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"}
+        ).get("imageWidth")
+        image_height = root.find(
+            "ns:Page", namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"}
+        ).get("imageHeight")
         print(image_width, image_height)
-                
+
         # XPath query to get TextRegion coordinates
         result = root.xpath(
-            '//ns:TextRegion/ns:TextLine',
-            namespaces={'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}
+            "//ns:TextRegion/ns:TextLine", namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"}
         )
 
         coords = {}
@@ -66,10 +69,11 @@ def get_coords(xml_path):
                 label = label[1] if len(label) > 1 else "no label"
             else:
                 label = "no label"
-            
+
             # get coordinates
-            text_coordinates = line.find("ns:Coords", namespaces={
-                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("points")
+            text_coordinates = line.find(
+                "ns:Coords", namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"}
+            ).get("points")
             region_coords = text_coordinates.split(" ")
             region_coords_full = []
             for coord in region_coords:
@@ -77,12 +81,13 @@ def get_coords(xml_path):
                 coord_new[0] = int(coord_new[0])
                 coord_new[1] = int(coord_new[1])
                 region_coords_full.append((coord_new[0], coord_new[1]))
-            
+
             coords.setdefault(label, []).append(region_coords_full)
 
     except etree.XMLSyntaxError:
         print(f"Error parsing {xml_path}. File may be malformed.")
     return coords, (image_width, image_height)
+
 
 def visualize_regions(image_path, coords, resize):
     """
@@ -98,7 +103,7 @@ def visualize_regions(image_path, coords, resize):
 
     # if resize is needed
     if resize:
-        resized_img_path= '/root/Thesis/resized.jpg'
+        resized_img_path = "/root/Thesis/resized.jpg"
         resized = image.resize((int(coords[1][0]), int(coords[1][1])))
         resized.save(resized_img_path)
         img = plt.imread(resized_img_path)
@@ -130,10 +135,10 @@ def visualize_regions(image_path, coords, resize):
             ax.fill(x, y, color=colors[counter], alpha=0.3)  # Fill with transparency
             used_labels.add(item[0])
 
-    ax.legend(bbox_to_anchor=(1.05, 1.0), loc='upper left')
+    ax.legend(bbox_to_anchor=(1.05, 1.0), loc="upper left")
 
     plt.tight_layout()
-    plt.savefig('/root/Thesis/visualizations/region_visualization.jpg', dpi=500)
+    plt.savefig("/root/Thesis/visualizations/region_visualization.jpg", dpi=500)
     plt.show()
 
     return
@@ -147,7 +152,7 @@ def main(args):
     coords = get_coords(args.xml)
     visualize_regions(args.image, coords, args.resize)
 
+
 if __name__ == "__main__":
     args = get_arguments()
     main(args)
-

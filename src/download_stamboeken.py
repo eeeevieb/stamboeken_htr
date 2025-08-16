@@ -12,10 +12,10 @@ from download_control_book import download_image
 def parse_html_content(content):
     """
     Parse HTML content and extract the <script> element of type 'application/json'.
-    
+
     Args:
         content (str): HTML content to parse.
-    
+
     Returns:
         dict: Parsed JSON data from the <script> tag, or None if not found.
     """
@@ -34,11 +34,11 @@ def parse_html_content(content):
 def extract_download_url(parsed_json, image_filename):
     """
     Extract the download URL for a specific image from the parsed JSON data.
-    
+
     Args:
         parsed_json (dict): JSON data extracted from the HTML content.
         image_filename (str): Name of the image file to find the URL for.
-    
+
     Returns:
         str: The download URL for the image, or None if not found.
     """
@@ -57,16 +57,16 @@ def extract_download_url(parsed_json, image_filename):
 def process_archive_link(archive_link, image_filename):
     """
     Fetch the archive link content and extract the download URL for the image.
-    
+
     Args:
         archive_link (str): URL of the archive page.
         image_filename (str): Name of the image file.
-    
+
     Returns:
         str: The download URL for the image, or None if not found.
     """
     try:
-        response = requests.get(archive_link, headers={'Content-Type': 'application/xml'})
+        response = requests.get(archive_link, headers={"Content-Type": "application/xml"})
         if response.status_code == 200:
             parsed_json = parse_html_content(response.content)
             if parsed_json:
@@ -81,10 +81,10 @@ def process_archive_link(archive_link, image_filename):
 def parse_excel_rows(file_path):
     """
     Parse rows from an Excel file using openpyxl.
-    
+
     Args:
         file_path (str): Path to the Excel file.
-    
+
     Yields:
         dict: Row data as a dictionary.
     """
@@ -99,7 +99,7 @@ def parse_excel_rows(file_path):
 def download_images_from_excel(input_file, output_directory):
     """
     Download images listed in an Excel file by constructing archive URLs.
-    
+
     Args:
         input_file (str): Path to the Excel file containing image data.
         output_directory (str): Directory to save the downloaded images.
@@ -110,7 +110,7 @@ def download_images_from_excel(input_file, output_directory):
 
     for row in tqdm(parse_excel_rows(input_file), desc="Processing rows"):
         stamboeken_number = row.get("NA_nummer")
-        if stamboeken_number and (match := re.search(r'NL-HaNA_(.*?)_(.*?)_.*$', stamboeken_number)):
+        if stamboeken_number and (match := re.search(r"NL-HaNA_(.*?)_(.*?)_.*$", stamboeken_number)):
             archive_number, inventory_number = match.groups()
             archive_link = (
                 f"https://www.nationaalarchief.nl/onderzoeken/archief/"
@@ -131,6 +131,6 @@ def download_images_from_excel(input_file, output_directory):
 
 
 if __name__ == "__main__":
-    INPUT_FILE = '../Bronbeek_Data/Stamboeken_combined.xlsx'
-    OUTPUT_DIRECTORY = '../bronbeek_stamboeken'
+    INPUT_FILE = "../Bronbeek_Data/Stamboeken_combined.xlsx"
+    OUTPUT_DIRECTORY = "../bronbeek_stamboeken"
     download_images_from_excel(INPUT_FILE, OUTPUT_DIRECTORY)

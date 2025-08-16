@@ -88,24 +88,24 @@ class XMLRegions:
         """
         # HACK hardcoded regions if none are given
         republic_regions = [
-        "Name",
-        "Award",
-        "Birth Place",
-        "Birth Date",
-        "Father",
-        "Mother",
-        "Religion",
-        "Marriage Location",
-        "Spouse",
-        "Children",
-        "Rank",
-        "Ship",
-        "Departure",
-        "Death Date",
-        "Death Place",
-        "Retirement",
-        "Repatriation",
-        "Text",
+            "Name",
+            "Award",
+            "Birth Place",
+            "Birth Date",
+            "Father",
+            "Mother",
+            "Religion",
+            "Marriage Location",
+            "Spouse",
+            "Children",
+            "Rank",
+            "Ship",
+            "Departure",
+            "Death Date",
+            "Death Place",
+            "Retirement",
+            "Repatriation",
+            "Text",
         ]
 
         parser = argparse.ArgumentParser(add_help=False)
@@ -175,7 +175,9 @@ class XMLRegions:
                 if parent in self._regions_internal:
                     to_merge[parent] = childs.split(",")
                 else:
-                    raise argparse.ArgumentTypeError(f'Malformed argument {c}\nRegion "{parent}" to merge is not defined as region')
+                    raise argparse.ArgumentTypeError(
+                        f'Malformed argument {c}\nRegion "{parent}" to merge is not defined as region'
+                    )
 
         seen_childs = set()
         for childs in to_merge.values():

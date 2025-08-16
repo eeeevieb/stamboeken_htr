@@ -4,7 +4,7 @@ import re
 import csv
 
 # Define the pattern for "folio <integer>"
-pattern = re.compile('folio [0-9]+', re.IGNORECASE)
+pattern = re.compile("folio [0-9]+", re.IGNORECASE)
 
 
 # Function to process each XML file
@@ -14,7 +14,7 @@ def process_xml(file_path):
         tree = etree.parse(file_path)
 
         # Define the namespace (taken from the XML)
-        namespace = {'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}
+        namespace = {"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"}
 
         # Use XPath to find all PlainText elements
         plain_text_elements = tree.xpath("//ns:PlainText", namespaces=namespace)
@@ -27,12 +27,12 @@ def process_xml(file_path):
 
         else:
             # If PlainText tags are found, check each one for the pattern
-            dict = {'image': None, 'folio': list()}
+            dict = {"image": None, "folio": list()}
             for element in plain_text_elements:
-                dict['image'] = file_path.split("/")[-1]
+                dict["image"] = file_path.split("/")[-1]
                 if element.text and pattern.search(element.text):
                     print(f"File: {file_path} | Tag: {element.tag} | Text: {element.text}")
-                    dict['folio'].append(element.text)
+                    dict["folio"].append(element.text)
             return dict
 
     except etree.XMLSyntaxError:
@@ -50,16 +50,16 @@ def process_all_xml_files(folder):
                 if folios:
                     folio_list.append(folios)
 
-    csv_file = os.path.join(output_directory, 'image_to_folio_mapping.csv')
-    with open(csv_file, mode='w', newline='') as file:
+    csv_file = os.path.join(output_directory, "image_to_folio_mapping.csv")
+    with open(csv_file, mode="w", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow(['image', 'folio'])
+        writer.writerow(["image", "folio"])
         for item in folio_list:
-            writer.writerow([item['image'], ', '.join(item['folio'])])
+            writer.writerow([item["image"], ", ".join(item["folio"])])
     print(f"Data has been written to {csv_file}")
 
 
 # Example usage
 input_path = "../image_samples/page"
-output_directory = '../output'
+output_directory = "../output"
 process_all_xml_files(input_path)

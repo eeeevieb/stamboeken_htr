@@ -1,12 +1,12 @@
 from groq import Groq
 
-input_path = '../../image_samples/page/NL-HaNA_2.10.50_71_0006.xml'
-description_path = 'information_description.txt'
+input_path = "../../image_samples/page/NL-HaNA_2.10.50_71_0006.xml"
+description_path = "information_description.txt"
 
-with open(input_path, 'r') as f:
+with open(input_path, "r") as f:
     input_file = f.read()
 
-with open(description_path, 'r') as f:
+with open(description_path, "r") as f:
     description_file = f.read()
 
 client = Groq()
@@ -15,10 +15,14 @@ completion = client.chat.completions.create(
     messages=[
         {
             "role": "user",
-            "content": "From xml file"+ input_path +"read the value  and extract the information metioned in this following file"+ description_file + ".\
+            "content": "From xml file"
+            + input_path
+            + "read the value  and extract the information metioned in this following file"
+            + description_file
+            + ".\
                   Do not give me the code, just extract these informations. \
                   Just extract the information based on the csv file. \
-                  If you cannot find the answer, just say infomration do not match."
+                  If you cannot find the answer, just say infomration do not match.",
         }
     ],
     temperature=1,

@@ -11,6 +11,7 @@ import argparse
 input_path = "/root/Thesis/stamboeken_htr/test"
 output_path = "/root/Thesis/stamboeken_htr/test"
 
+
 def get_arguments():
     parser = argparse.ArgumentParser(description="Visualization of regions")
 
@@ -20,6 +21,7 @@ def get_arguments():
     args = parser.parse_args()
 
     return args
+
 
 def create_training_data(input_path, output_path):
 
@@ -34,16 +36,12 @@ def create_training_data(input_path, output_path):
         master_fd, slave_fd = pty.openpty()
 
         # Call CLI Process
-        cmd = "scripts/inference-pipeline.sh " \
-                    f"{input_path}"
+        cmd = "scripts/inference-pipeline.sh " f"{input_path}"
 
         print("[DEBUG]: {}".format(cmd))
-        proc = subprocess.Popen(cmd,
-                                stdin=slave_fd,
-                                stderr=subprocess.STDOUT,
-                                shell=True,
-                                universal_newlines=True,
-                                start_new_session=True)
+        proc = subprocess.Popen(
+            cmd, stdin=slave_fd, stderr=subprocess.STDOUT, shell=True, universal_newlines=True, start_new_session=True
+        )
 
         proc.communicate()
         print(f"Successfully ran bash script: {cmd}")
@@ -68,6 +66,7 @@ def main(args):
     """
 
     create_training_data(args.input, args.output)
+
 
 if __name__ == "__main__":
     args = get_arguments()
