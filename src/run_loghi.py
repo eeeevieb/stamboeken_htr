@@ -5,10 +5,10 @@ import time
 import subprocess
 
 # Define paths
-source_folder = '../stamboek_906'  # Folder where the images are initially located
-destination_folder = '../image_samples'  # Folder where the image will be moved
-bash_script = 'scripts/inference-pipeline.sh'  # Path to your bash script
-base_name = 'NL-HaNA_2.10.36.22_906_'  # Base name for image
+source_folder = "../stamboek_906"  # Folder where the images are initially located
+destination_folder = "../image_samples"  # Folder where the image will be moved
+bash_script = "scripts/inference-pipeline.sh"  # Path to your bash script
+base_name = "NL-HaNA_2.10.36.22_906_"  # Base name for image
 
 
 # Function to copy the image
@@ -35,20 +35,16 @@ def run_bash_script():
         master_fd, slave_fd = pty.openpty()
 
         # Call CLI Process
-        cmd = "scripts/inference-pipeline.sh " \
-                  "../image_samples"
+        cmd = "scripts/inference-pipeline.sh " "../image_samples"
 
         print("[DEBUG]: {}".format(cmd))
-        proc = subprocess.Popen(cmd,
-                                stdin=slave_fd,
-                                stderr=subprocess.STDOUT,
-                                shell=True,
-                                universal_newlines=True,
-                                start_new_session=True)
+        proc = subprocess.Popen(
+            cmd, stdin=slave_fd, stderr=subprocess.STDOUT, shell=True, universal_newlines=True, start_new_session=True
+        )
 
         proc.communicate()
         print(f"Successfully ran bash script: {cmd}")
-        
+
     except subprocess.CalledProcessError as e:
         print(f"Error running bash script: {e}")
 
@@ -58,7 +54,7 @@ def delete_image(image_name):
     image_path = os.path.join(destination_folder, image_name)
     if os.path.exists(image_path):
         os.remove(image_path)
-        os.remove(image_path+".done")
+        os.remove(image_path + ".done")
         print(f"Deleted {image_name} from {destination_folder}")
     else:
         print(f"{image_name} not found in {destination_folder}")
@@ -68,7 +64,7 @@ def delete_image(image_name):
 def main():
     for i in range(77, 267):  # Loop from 0004 to 0266
         image_name = f"{base_name}{str(i).zfill(4)}"  # Format the counter with leading zeros
-        image_name += '.jpg'  # Assuming the images are in .jpg format
+        image_name += ".jpg"  # Assuming the images are in .jpg format
 
         # Step 1: Copy the image
         copy_image(image_name)
@@ -83,5 +79,5 @@ def main():
         time.sleep(5)  # Adjust the sleep time as needed
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

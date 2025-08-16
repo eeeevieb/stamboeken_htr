@@ -14,8 +14,8 @@ def extract_textequiv(file_path):
 
         # XPath query to get TextRegion id, TextLine id, and TextEquiv text without nested Word tags
         result = root.xpath(
-            '//ns:TextRegion/ns:TextLine[ns:TextEquiv[not(ancestor::ns:Word)]]',
-            namespaces={'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}
+            "//ns:TextRegion/ns:TextLine[ns:TextEquiv[not(ancestor::ns:Word)]]",
+            namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"},
         )
 
         if result is None:
@@ -35,8 +35,10 @@ def extract_textequiv(file_path):
             for line in result:
                 text_region_id = line.getparent().get("id")
                 text_line_id = line.get("id")
-                text_equiv_text = line.find("ns:TextEquiv/ns:PlainText", namespaces={
-                    'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).text
+                text_equiv_text = line.find(
+                    "ns:TextEquiv/ns:PlainText",
+                    namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"},
+                ).text
                 csvwriter.writerow([text_region_id, text_line_id, text_equiv_text])
 
     except etree.XMLSyntaxError:
@@ -60,20 +62,20 @@ def extract_textequiv(file_path):
 
 def extract_information(xml_file, output_file):
     """
-        Extracts genealogy information, i.e.,:
-            - Vader (father)
-            - Moeder (mother)
-            - Geboorte datum (birth date)
-            - Geboorte Plaats (birthplace)
-            - Laatste Woonplaats (last residence)
-        Extract  campaigns (LAST COLUMN); leaving the special comment from the same column
-        from the XML content based on different cases.
+    Extracts genealogy information, i.e.,:
+        - Vader (father)
+        - Moeder (mother)
+        - Geboorte datum (birth date)
+        - Geboorte Plaats (birthplace)
+        - Laatste Woonplaats (last residence)
+    Extract  campaigns (LAST COLUMN); leaving the special comment from the same column
+    from the XML content based on different cases.
 
-        Parameters:
-        xml_file (file): XML data as a file
+    Parameters:
+    xml_file (file): XML data as a file
 
-        Returns:
-        dict: Extracted genealogy information.
+    Returns:
+    dict: Extracted genealogy information.
 
     """
     try:
@@ -83,8 +85,8 @@ def extract_information(xml_file, output_file):
         new_tree = etree.ElementTree(root)
 
         result = new_tree.xpath(
-            '//ns:TextRegion/ns:TextLine[ns:TextEquiv[not(ancestor::ns:Word)]]',
-            namespaces={'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}
+            "//ns:TextRegion/ns:TextLine[ns:TextEquiv[not(ancestor::ns:Word)]]",
+            namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"},
         )
 
         if result is None:
@@ -116,10 +118,13 @@ def extract_information(xml_file, output_file):
         for line in result:
             text_region_id = line.getparent().get("id")
             text_line_id = line.get("id")
-            text_equiv_text = line.find("ns:TextEquiv/ns:PlainText", namespaces={
-                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).text
-            text_coordinates = line.find("ns:Coords", namespaces={
-                'ns': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}).get("points")
+            text_equiv_text = line.find(
+                "ns:TextEquiv/ns:PlainText",
+                namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"},
+            ).text
+            text_coordinates = line.find(
+                "ns:Coords", namespaces={"ns": "http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15"}
+            ).get("points")
             region = line.getparent()
             # print(region)
 
@@ -135,32 +140,32 @@ def extract_information(xml_file, output_file):
                 text_by_region[text_region_id] = text_equiv_text
 
             # Case 1: Extract Vader
-            vader_match = re.search(r'.*Vader\s+(.+)', text_equiv_text, re.IGNORECASE)
+            vader_match = re.search(r".*Vader\s+(.+)", text_equiv_text, re.IGNORECASE)
             if vader_match:
                 genealogy_info["Vader"] = vader_match.group(1).strip()
-                new_region = line.getparent().get("custom").split(' ')
-                new_region[-1] = '{type:Name;}'
+                new_region = line.getparent().get("custom").split(" ")
+                new_region[-1] = "{type:Name;}"
                 new_region = " ".join(new_region)
                 print(new_region)
                 region.set("custom", new_region)
                 # genealogy_info["Vader region"] = text_coordinates
 
             # Case 2: Extract Moeder
-            moeder_match = re.search(r'.*Moeder\s+(.+)', text_equiv_text, re.IGNORECASE)
+            moeder_match = re.search(r".*Moeder\s+(.+)", text_equiv_text, re.IGNORECASE)
             if moeder_match:
                 genealogy_info["Moeder"] = moeder_match.group(1).strip()
-                new_region = line.getparent().get("custom").split(' ')
-                new_region[-1] = '{type:Name;}'
+                new_region = line.getparent().get("custom").split(" ")
+                new_region[-1] = "{type:Name;}"
                 new_region = " ".join(new_region)
                 region.set("custom", new_region)
                 # genealogy_info["Moeder region"] = text_coordinates
 
             # Case 3: Extract Geboorte datum (e.g., "Geboren: 01-01-1900")
-            geboorte_datum_match = re.search(r'Geboren\s+(.+)^(?!.*te\s+).+$', text_equiv_text, re.IGNORECASE)
+            geboorte_datum_match = re.search(r"Geboren\s+(.+)^(?!.*te\s+).+$", text_equiv_text, re.IGNORECASE)
             if geboorte_datum_match:
                 genealogy_info["Geboorte datum"] = geboorte_datum_match.group(1).strip()
-                new_region = line.getparent().get("custom").split(' ')
-                new_region[-1] = '{type:Date;}'
+                new_region = line.getparent().get("custom").split(" ")
+                new_region[-1] = "{type:Date;}"
                 new_region = " ".join(new_region)
                 region.set("custom", new_region)
                 # genealogy_info["Geboortedatum region"] = text_coordinates
@@ -168,23 +173,23 @@ def extract_information(xml_file, output_file):
             # print(repr(text_equiv_text))
 
             # Case 4: Extract Geboorte Plaats (e.g., "te Amsterdam")
-            geboorte_plaats_match = re.search(r'te\s+(.+)', text_equiv_text, re.IGNORECASE)
+            geboorte_plaats_match = re.search(r"te\s+(.+)", text_equiv_text, re.IGNORECASE)
             if geboorte_plaats_match:
                 # if genealogy_info["Geboorte Plaats"] is None:
                 genealogy_info["Geboorte Plaats"] = geboorte_plaats_match.group(1).strip()
-                new_region = line.getparent().get("custom").split(' ')
-                new_region[-1] = '{type:Place;}'
+                new_region = line.getparent().get("custom").split(" ")
+                new_region[-1] = "{type:Place;}"
                 new_region = " ".join(new_region)
                 region.set("custom", new_region)
                 # print(geboorte_plaats_match.group(1).strip())
-                    # genealogy_info["Geboorteplaats region"] = text_coordinates
+                # genealogy_info["Geboorteplaats region"] = text_coordinates
 
             # Case 5: Extract Laatste Woonplaats (e.g., "laatst gewoond te Rotterdam")
-            laatste_woonplaats_match = re.search(r'laatst\s*gewoond te\s+(.+)', text_equiv_text, re.IGNORECASE)
+            laatste_woonplaats_match = re.search(r"laatst\s*gewoond te\s+(.+)", text_equiv_text, re.IGNORECASE)
             if laatste_woonplaats_match:
                 genealogy_info["Laatste Woonplaats"] = laatste_woonplaats_match.group(1).strip()
-                new_region = line.getparent().get("custom").split(' ')
-                new_region[-1] = '{type:Place;}'
+                new_region = line.getparent().get("custom").split(" ")
+                new_region[-1] = "{type:Place;}"
                 new_region = " ".join(new_region)
                 region.set("custom", new_region)
                 # genealogy_info["Laatste woonplaats region"] = text_coordinates
@@ -192,20 +197,20 @@ def extract_information(xml_file, output_file):
             # Case 6: Extract campaign (e.g., "1809 Zeeland")
 
             # Case 7 (Eva): All dates
-            date_match = re.search(r'[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*', text_equiv_text, re.IGNORECASE)
+            date_match = re.search(r"[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*", text_equiv_text, re.IGNORECASE)
             if date_match:
                 # genealogy_info["Laatste Woonplaats"] = laatste_woonplaats_match.group(1).strip()
-                new_region = line.getparent().get("custom").split(' ')
-                new_region[-1] = '{type:Date;}'
+                new_region = line.getparent().get("custom").split(" ")
+                new_region[-1] = "{type:Date;}"
                 new_region = " ".join(new_region)
                 region.set("custom", new_region)
                 # genealogy_info["Laatste woonplaats region"] = text_coordinates
 
-            campaign_match = re.search(r'\b(\d{4})\s+([a-zA-Z]+.*)', text_equiv_text, re.IGNORECASE)
+            campaign_match = re.search(r"\b(\d{4})\s+([a-zA-Z]+.*)", text_equiv_text, re.IGNORECASE)
             if campaign_match:
                 campaign = {"Year": campaign_match.group(1).strip(), "Place": campaign_match.group(2).strip()}
-                new_region = line.getparent().get("custom").split(' ')
-                new_region[-1] = '{type:Campaign;}'
+                new_region = line.getparent().get("custom").split(" ")
+                new_region[-1] = "{type:Campaign;}"
                 new_region = " ".join(new_region)
                 region.set("custom", new_region)
                 campaign_list.append(campaign)
@@ -213,36 +218,38 @@ def extract_information(xml_file, output_file):
         # Extract Event --> Military posting information
         for region_id, concatenated_text in text_by_region.items():
             # print(f"Region ID: {region_id}, Text: {concatenated_text}")
-            date_pattern = r'[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*' # 2-digit(date) followed by string(month) followed by 4-digit(year)
+            date_pattern = (
+                r"[0-9]{1,2}\s[A-Z]+[a-z]*\s[1-9]{4}\.*"  # 2-digit(date) followed by string(month) followed by 4-digit(year)
+            )
             pattern = rf"(.*?{date_pattern})"
             event_lines = re.findall(pattern, concatenated_text)
             if len(event_lines) >= 2:
                 for event in event_lines:
-                    match = re.search(rf'(.*)?({date_pattern})', event, re.IGNORECASE)
-                    event_dict = {
-                        'Context': match.group(1).strip(),
-                        'Date': match.group(2).strip()
-                    }
+                    match = re.search(rf"(.*)?({date_pattern})", event, re.IGNORECASE)
+                    event_dict = {"Context": match.group(1).strip(), "Date": match.group(2).strip()}
                     event_list.append(event_dict)
 
         print(genealogy_info)
 
-        with open(output_file, 'a') as f:
+        with open(output_file, "a") as f:
             csvwriter = csv.writer(f)
             csvwriter.writerow(
-                [''.join(xml_file.split('/')[-1].split(".")[:-1]),
-                 genealogy_info["Vader"],
-                #  genealogy_info["Vader region"],
-                 genealogy_info["Moeder"],
-                #  genealogy_info["Moeder region"],
-                 genealogy_info["Geboorte datum"],
-                #  genealogy_info["Geboortedatum region"],
-                 genealogy_info["Geboorte Plaats"],
-                #  genealogy_info["Geboorteplaats region"],
-                 genealogy_info["Laatste Woonplaats"],
-                #  genealogy_info["Laatste woonplaats region"],
-                 ';'.join([str(dict) for dict in campaign_list]),
-                 ';'.join([str(event) for event in event_list])])
+                [
+                    "".join(xml_file.split("/")[-1].split(".")[:-1]),
+                    genealogy_info["Vader"],
+                    #  genealogy_info["Vader region"],
+                    genealogy_info["Moeder"],
+                    #  genealogy_info["Moeder region"],
+                    genealogy_info["Geboorte datum"],
+                    #  genealogy_info["Geboortedatum region"],
+                    genealogy_info["Geboorte Plaats"],
+                    #  genealogy_info["Geboorteplaats region"],
+                    genealogy_info["Laatste Woonplaats"],
+                    #  genealogy_info["Laatste woonplaats region"],
+                    ";".join([str(dict) for dict in campaign_list]),
+                    ";".join([str(event) for event in event_list]),
+                ]
+            )
 
         new_tree.write("test.xml", pretty_print=True, xml_declaration=True, encoding="UTF-8")
 
@@ -252,12 +259,14 @@ def extract_information(xml_file, output_file):
 
 # Walk through all .xml files in the folder
 def process_all_xml_files(folder):
-    output_file = os.path.join(output_path, 'regex_extracted_information_yes.csv')
-    with open(output_file, 'w+') as f:
+    output_file = os.path.join(output_path, "regex_extracted_information_yes.csv")
+    with open(output_file, "w+") as f:
         csvwriter = csv.writer(f)
         # Write header row
         # csvwriter.writerow(["stamboeken", "Vader", "Vader region", "Moeder", "Moeder region", "Geboorte datum", "Geboortedatum region", "Geboorte Plaats", "Geboorteplaats region", "Laatste Woonplaats", "Laatste woonplaats region", "Campaigns"])
-        csvwriter.writerow(["stamboeken", "Vader", "Moeder", "Geboorte datum", "Geboorte Plaats", "Laatste Woonplaats", "Campaigns"])
+        csvwriter.writerow(
+            ["stamboeken", "Vader", "Moeder", "Geboorte datum", "Geboorte Plaats", "Laatste Woonplaats", "Campaigns"]
+        )
 
     for root_dir, _, files in os.walk(folder):
         for file_name in sorted(files):
@@ -270,8 +279,8 @@ def process_all_xml_files(folder):
 
 
 # Example usage
-input_path = '/root/Thesis/xmls/transcript'
-output_path = '../output'
+input_path = "/root/Thesis/xmls/transcript"
+output_path = "../output"
 
 process_all_xml_files(input_path)
 # print(extract_information("../image_samples/page/NL-HaNA_2.10.50_71_0006.xml", "out.csv")) # perfect exmaple NL-HaNA_2.10.50_71_0006.xml
