@@ -23,7 +23,7 @@ def get_textline_el(xml_path):
 
         textline = textlines[0]
 
-        # Add Name label to TextLine elemtn
+        # Add Name label to TextLine element
         new_region = textline.get("custom")
         new_region += " structure {type:Name;}"
         textline.set("custom", new_region)
@@ -95,20 +95,24 @@ def get_prompt_vars(xml, image):
             - path to the xml containing only coordinates (string)
             - path to image xml corresponds with (string)
             - the first textline element of XML (string)
-            - the textline id of first textline elemnt (string)
+            - the id of first textline element (string)
             - the text of the first textline element (string)
+            - the id of the first textline element of the transcript (string)
+            - the id text of the first textline element of the transcript (string)
+            - the path to the transcript
     """
 
-    xml_path = "/root/Thesis/stamboeken_htr/experiment_2/empty_xmls/" + xml
-    im_path = "/root/Thesis/stamboeken_htr/experiment_2/stamboeken/" + image
-    transcript_path = "/root/Thesis/stamboeken_htr/experiment_2/xml_transcripts/" + xml.strip(".xml") + "_fixed.xml"
+    xml_path = "/root/Thesis/stamboeken_htr/LLM_experiments/empty_xmls/" + xml
+    im_path = "/root/Thesis/stamboeken_htr/LLM_experiments/stamboeken_resized/" + image
+    transcript_path = "/root/Thesis/stamboeken_htr/LLM_experiments/stamboeken_resized/fixed/" + xml.strip(".xml") + "_fixed.xml"
     
     textline_string, textline_id = get_textline_el(xml_path)
     name = get_name(transcript_path)
+    trans_textline_string, trans_textline_id = get_textline_el(transcript_path)
 
-    return xml_path, im_path, textline_string, textline_id, name
+    return xml_path, im_path, textline_string, textline_id, name, trans_textline_string, trans_textline_id, transcript_path
 
-def prompt_gemini(client, prompt_template, xml, image, textline_string, textline_id, name, exp):
+def prompt_gemini(client, prompt_template, xml, image, textline_string, textline_id, name, exp, image_name):
     """
         Prompts Gemini Flash 2.0
 
@@ -121,6 +125,7 @@ def prompt_gemini(client, prompt_template, xml, image, textline_string, textline
             textline_id: id of the first textline element of xml (string)
             name: name/text of first textline element of xml (string)
             exp: 1 for experiment 1 and 2 for experiment 2 (int)
+            image_name: the name of the image for region recognition
         
         returns:
             response (string)
@@ -135,7 +140,8 @@ def prompt_gemini(client, prompt_template, xml, image, textline_string, textline
         text_id=textline_id,
         name=name,
         element=textline_string,
-        image=image[0]
+        image=image[0],
+        image_name=image_name
     )
 
         # Prompt Gemini
@@ -143,7 +149,7 @@ def prompt_gemini(client, prompt_template, xml, image, textline_string, textline
             response = client.models.generate_content(
                 model="gemini-2.0-flash",
                 contents=[prompt, image[0], image[1]])
-        if exp == 2:
+        if exp == 2 or exp == 3:
             response = client.models.generate_content(
                 model="gemini-2.0-flash",
                 contents=[prompt, image[0]])
@@ -154,11 +160,17 @@ def prompt_gemini(client, prompt_template, xml, image, textline_string, textline
 def encode_image(image_path):
     """
         Encodes image into base64
+
+        args:
+            image_path: path to image to encode
+
+        returns:
+            base64 encoded image
     """
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
-def prompt_llama(client, prompt_template, xml, image, textline_string, textline_id, name, exp):
+def prompt_llama(client, prompt_template, xml, image, textline_string, textline_id, name, exp, image_name):
     """
         Prompts Llama 3.2 90B Vision (Preview)
 
@@ -187,7 +199,8 @@ def prompt_llama(client, prompt_template, xml, image, textline_string, textline_
         text_id=textline_id,
         name=name,
         element=textline_string,
-        image=base64_image
+        image=base64_image,
+        image_name=image_name
     )
 
         # Prompt LLama
@@ -215,10 +228,10 @@ def prompt_llama(client, prompt_template, xml, image, textline_string, textline_
                         ],
                     }
                 ],
-                model="llama-3.2-11b-vision-preview",
+                model="meta-llama/llama-4-maverick-17b-128e-instruct",
             )
         
-        if exp == 2:
+        if exp == 2 or exp == 3:
             chat_completion = client.chat.completions.create(
                 messages=[
                     {
@@ -234,7 +247,7 @@ def prompt_llama(client, prompt_template, xml, image, textline_string, textline_
                         ],
                     }
                 ],
-                model="llama-3.2-90b-vision-preview",
+                model="meta-llama/llama-4-maverick-17b-128e-instruct",
             )
 
     return chat_completion.choices[0].message.content
