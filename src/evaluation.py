@@ -10,7 +10,8 @@ import argparse
 def get_arguments():
     parser = argparse.ArgumentParser(description="Evaluation script. Calculates mIoU, recall, precision and F1")
 
-    parser.add_argument("-i", "--input", help="Path to input folder", type=str, required=True)
+    parser.add_argument("-e", "--experiment_results", help="Path to experiment results folder", type=str, required=True)
+    parser.add_argument("-gt", "--ground_truth", help="Path to ground truth folder", type=str, required=True)
 
     args = parser.parse_args()
 
@@ -178,7 +179,7 @@ def calc_miou(path_exp, path_gt):
     
     return ious, iou_per_label, true_positives_per_label, regions_per_label_exp, regions_per_label_gt, eval2
 
-def main(folder_input):
+def main(exp_input, gt_input):
     # initiate dicts to store evaluation metrics
     iou_dict = {"Name": [], "Award": [], "Birth Place": [], "Birth Date": [], "Father": [],
                         "Mother": [], "Religion": [], "Marriage Location": [], "Spouse": [],
@@ -232,12 +233,12 @@ def main(folder_input):
                         "Death Place": float('nan'), "Retirement": float('nan'), "Repatriation": float('nan'), "Text": float('nan')}
 
 
-    for root_dir, _, files in os.walk(folder_input):
+    for root_dir, _, files in os.walk(exp_input):
         for file_name in sorted(files):
             if file_name.endswith(".xml"):
                 file_path = os.path.join(root_dir, file_name)
                 print(f"Processing xml: {file_path}...")
-                gt_path = '/root/Thesis/laypa/training_data/page/' + file_name
+                gt_path = gt_input + '/' + file_name
 
                 ious_individual, iou_dict_individual, true_positives_per_label_individual, regions_per_label_exp_individual, regions_per_label_gt_individual, individual_eval2 = calc_miou(file_path, gt_path)
                 
@@ -310,4 +311,4 @@ def main(folder_input):
 
 if __name__ == "__main__":
     args = get_arguments()
-    main(args.input)
+    main(args.experiment_results, args.ground_truth)

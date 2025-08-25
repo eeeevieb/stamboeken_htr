@@ -4,6 +4,7 @@ import re
 from shapely.geometry import Polygon
 from PIL import Image 
 import argparse
+import os
 
 
 def get_arguments():
@@ -93,7 +94,7 @@ def visualize_regions(image_path, coords, resize):
 
     # if resize is needed
     if resize:
-        resized_img_path= '/root/Thesis/resized.jpg'
+        resized_img_path= '../resized.jpg'
         resized = image.resize((int(coords[1][0]), int(coords[1][1])))
         resized.save(resized_img_path)
         img = plt.imread(resized_img_path)
@@ -104,7 +105,7 @@ def visualize_regions(image_path, coords, resize):
     colors = {"Name": "red", "Award": "green", "Birth Place": "blue", "Birth Date": "yellow", "Father": "orange",
                     "Mother": "purple", "Religion": "pink", "Marriage Location": "cyan", "Spouse": "violet",
                     "Children": "fuchsia", "Rank": "steelblue", "Ship": "lime", "Departure": "darkgoldenrod", "Death Date": "teal",
-                    "Death Place": "darkviolet", "Retirement": "darkred", "Repatriation": "greenyellow", "Text": "beige"}
+                    "Death Place": "darkviolet", "Retirement": "darkred", "Repatriation": "greenyellow", "Text": "beige", "no label": "beige"}
     used_labels = set()
 
     # plot image
@@ -132,7 +133,8 @@ def visualize_regions(image_path, coords, resize):
     ax.legend(bbox_to_anchor=(1.05, 1.0), loc='upper left')
 
     plt.tight_layout()
-    plt.savefig('/root/Thesis/visualizations/region_visualization.jpg', dpi=500)
+    os.makedirs('../visualizations', exist_ok=True)
+    plt.savefig('../visualizations/region_visualization.jpg', dpi=500)
     plt.show()
 
     return

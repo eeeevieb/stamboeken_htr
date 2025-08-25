@@ -19,13 +19,13 @@ GEMINI_2 = 1
 # Experiment 3: Label provided pageXML file containing coordinates and transcript using Gemini Flash 2.0
 GEMINI_3 = 1
 
-# Experiment 1: Produce full pageXML file including coordinates and region labels using LLama vision
+# Experiment 1: Produce full pageXML file including coordinates and region labels using LLama 4 Maverick
 LLAMA_1 = 1
 
-# Experiment 2: Label provided pageXML file containing coordinates using Llama vision
+# Experiment 2: Label provided pageXML file containing coordinates using Llama 4 Maverick
 LLAMA_2 = 1
 
-# Experiment 2: Label provided pageXML file containing coordinates and transcript using Llama vision
+# Experiment 3: Label provided pageXML file containing coordinates and transcript using Llama 4 Maverick
 LLAMA_3 = 1
 
 # Names of files used
@@ -73,8 +73,6 @@ prompt_1 = rf"Attached are two handwritten Dutch pages, \"NL-HaNA_2.10.50_1_0005
                 The full xml file looks like this:"+"{input_file}"+"\
                 \
                 Q: Can you provide me with a PageXML file containing coordinates of text regions, text lines and baselines of \""+"{image_name}"+"\", and add labels to the text lines? It can be one of the following labels: Name, Award, Father, Mother, Birth Date, Birth Place, Religion, Marriage Location, Spouse, Children, Rank, Ship, Departure, Retirement, Repatriation, Death Date, Death Place. If the text line does not fit any of the categories, do not label it. Please return only the full labeled pageXML file."
-
-# prompt_1 = "Describe these images"
 
 # Prompt for experiment 2
 prompt_2 = rf"The following pageXML file contains regions, textlines and baselines of the attached image."+ "{input_file}"+ "This image contains names, geneological data, date of appointment and advancement in the corps, which ship was taken, when and how discharged or died, and specialities.\
@@ -148,7 +146,7 @@ if __name__ == "__main__":
             # Prompting
             for index, xml in enumerate(xml_list):
                 xml_path, im_path, textline_string, textline_id, name, trans_textline_string, trans_textline_id, transcript_path = get_prompt_vars(xml, im_list[index])
-                result = prompt_llama(llama_client, prompt_1, xml_path, [im_path, '/root/Thesis/stamboeken_htr/LLM_experiments/example_stamboek/resized/NL-HaNA_2.10.50_1_0005_0.JPG'], textline_string, textline_id, name, 1, xml.strip(".xml"))
+                result = prompt_llama(llama_client, prompt_1, xml_path, [im_path, '../../LLM_experiment_data/handlabeled_stamboek_resized/NL-HaNA_2.10.50_1_0005_0.JPG'], textline_string, textline_id, name, 1, xml.strip(".xml"))
                 print(f"Prompt {index} LLama exp1 done")
                 results[0].append(result)
                 time.sleep(60)    # Waiting to deal with rate limits
@@ -200,7 +198,7 @@ if __name__ == "__main__":
             # Prompting
             for index, xml in enumerate(xml_list):
                 xml_path, im_path, textline_string, textline_id, name, trans_textline_string, trans_textline_id, transcript_path = get_prompt_vars(xml, im_list[index])
-                result = prompt_gemini(gemini_client, prompt_1,xml_path, [im_path, '/root/Thesis/stamboeken_htr/LLM_experiments/example_stamboek/resized/NL-HaNA_2.10.50_1_0005_0.JPG'], textline_string, textline_id, name, 1, xml.strip(".xml"))
+                result = prompt_gemini(gemini_client, prompt_1,xml_path, [im_path, '../../LLM_experiment_data/handlabeled_stamboek_resized/NL-HaNA_2.10.50_1_0005_0.JPG'], textline_string, textline_id, name, 1, xml.strip(".xml"))
                 print(f"Prompt {index} Gemini exp1 done")
                 results[0].append(result)
 
