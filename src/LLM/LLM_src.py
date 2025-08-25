@@ -102,9 +102,9 @@ def get_prompt_vars(xml, image):
             - the path to the transcript
     """
 
-    xml_path = "/root/Thesis/stamboeken_htr/LLM_experiments/empty_xmls/" + xml
-    im_path = "/root/Thesis/stamboeken_htr/LLM_experiments/stamboeken_resized/" + image
-    transcript_path = "/root/Thesis/stamboeken_htr/LLM_experiments/stamboeken_resized/fixed/" + xml.strip(".xml") + "_fixed.xml"
+    xml_path = "../../LLM_experiment_data/empty_xmls_resized/" + xml
+    im_path = "../../LLM_experiment_data/stamboeken_resized/" + image
+    transcript_path = "../../LLM_experiment_data/stamboeken_resized/fixed/" + xml.strip(".xml") + "_fixed.xml"
     
     textline_string, textline_id = get_textline_el(xml_path)
     name = get_name(transcript_path)
