@@ -5,23 +5,24 @@ import os
 import pty
 import argparse
 
-# input: (folder with) stamboeken
-# output: (folder with) labeled xml files
-
-input_path = "/root/Thesis/stamboeken_htr/test"
-output_path = "/root/Thesis/stamboeken_htr/test"
-
 def get_arguments():
     parser = argparse.ArgumentParser(description="Visualization of regions")
 
-    parser.add_argument("-i", "--input", help="Path to input folder", type=str, required=True)
+    parser.add_argument("-i", "--input", help="Path to input folder containing images", type=str, required=True)
     parser.add_argument("-o", "--output", help="Path to output folder", type=str, required=True)
 
     args = parser.parse_args()
 
     return args
 
-def create_training_data(input_path, output_path):
+def create_ground_truth(input_path, output_path):
+    """
+        Creates ground truth. Takes images, creates a transcript, fixes the transcript and labels the transcript.
+
+        args:
+            input_path: path to folder with images
+            output_path: path to where the labeled transcripts should be saved
+    """
 
     # Create transcripts
     try:
@@ -63,11 +64,7 @@ def create_training_data(input_path, output_path):
 
 
 def main(args):
-    """
-    Plots regions from a pageXML file on a given image
-    """
-
-    create_training_data(args.input, args.output)
+    create_ground_truth(args.input, args.output)
 
 if __name__ == "__main__":
     args = get_arguments()
