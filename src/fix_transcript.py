@@ -14,7 +14,7 @@ def get_arguments():
 
 def fix(xml_path):
     """
-    ASCII characters -1
+    Changes the text in Plaintext and Unicode elements so that the characters are -1 ASCII
     """
     
     try:
